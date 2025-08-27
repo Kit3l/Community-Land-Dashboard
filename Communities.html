@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Communities</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f5f7fb;
+      color: #333;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: linear-gradient(135deg, #e4d12b, #EAECC6);
+      color: white;
+      padding: 30px 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar ul li a:hover {
+      opacity: 0.8;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .county {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .county h2 {
+      color: #e4ce2b;
+      margin-bottom: 10px;
+    }
+
+    .community-list {
+      margin-left: 20px;
+    }
+
+    .community-list li {
+      margin-bottom: 6px;
+      cursor: pointer;
+      color: #007acc;
+    }
+
+    .community-list li:hover {
+      text-decoration: underline;
+    }
+
+    .community-details {
+      margin-top: 10px;
+      padding: 15px;
+      background: #eef6fb;
+      border-left: 5px solid #2BC0E4;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .community-details.active {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 20px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Drylands Learning & Capacity Building Initiative</h2>
+    <ul>
+      <li><a href="dashboard.html"><span>🏠</span>&nbsp; Dashboard</a></li>
+      <li><a href="communities.html"><span>🌍</span>&nbsp; Communities</a></li>
+      <li><a href="#"><span>🧑</span>&nbsp; Users</a></li>
+      <li><a href="#"><span>📋</span>&nbsp; Reports</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>🌍 Counties & Communities</h1>
+
+    <div class="county">
+      <h2>Turkana</h2>
+      <ul class="community-list">
+        <li><a href="dashboard.html?community=Lorengippi">Lorengippi</a></li>
+        <li><a href="dashboard.html?community=Turkana%20West">Turkana West</a></li>
+        <li><a href="dashboard.html?community=Lokichar">Lokichar</a></li>
+      </ul>
+    </div>
+
+    <div class="county">
+      <h2>Wajir</h2>
+      <ul class="community-list">
+        <li><a href="dashboard.html?community=Leheley">Leheley</a></li>
+        <li><a href="dashboard.html?community=Diff">Diff</a></li>
+        <li><a href="dashboard.html?community=Sabuli">Sabuli</a></li>
+      </ul>
+    </div>
+
+    <div class="county">
+      <h2>Marsabit</h2>
+      <ul class="community-list">
+        <li><a href="dashboard.html?community=Obittu">Obittu</a></li>
+        <li><a href="dashboard.html?community=Walda">Walda</a></li>
+      </ul>
+    </div>
+
+    <div class="county">
+      <h2>West Pokot</h2>
+      <ul class="community-list">
+        <li><a href="dashboard.html?community=Lokitonyila">Lokitonyila</a></li>
+        <li><a href="dashboard.html?community=Kasei">Kasei</a></li>
+        <li><a href="dashboard.html?community=Alale">Alale</a></li>
+      </ul>
+    </div>
+
+    <div class="county">
+      <h2>Isiolo</h2>
+      <ul class="community-list">
+        <li><a href="dashboard.html?community=Charri">Charri</a></li>
+        <li><a href="dashboard.html?community=Cherab">Cherab</a></li>
+        <li><a href="dashboard.html?community=Kinna">Kinna</a></li>
+      </ul>
+    </div>
+
+    <div id="map-container" style="margin-top: 30px; height: 600px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>
+
+    <div id="community-info" class="community-details"></div>
+
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const communityData = {
+      "Lorengippi": { members: 250, landsize: "1200 sq km", clmc: "CLMC Lorengippi", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Turkana West": { members: 340, landsize: "1500 sq km", clmc: "CLMC Turkana West", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Lokichar": { members: 190, landsize: "980 sq km", clmc: "CLMC Lokicha", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Leheley": { members: 220, landsize: "1100 sq km", clmc: "CLMC Leheley", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Diff": { members: 300, landsize: "1230 sq km", clmc: "CLMC Diff", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Sabuli": { members: 280, landsize: "1050 sq km", clmc: "CLMC Sabuli", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Obittu": { members: 170, landsize: "900 sq km", clmc: "CLMC Obittu", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Walda": { members: 210, landsize: "1120 sq km", clmc: "CLMC Walda", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Lokitonyila": { members: 195, landsize: "950 sq km", clmc: "CLMC Lokitonyila", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Kasei": { members: 230, landsize: "1180 sq km", clmc: "CLMC Kasei", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Alale": { members: 260, landsize: "1300 sq km", clmc: "CLMC Alale", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Charri": { members: 180, landsize: "870 sq km", clmc: "CLMC Charri", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Cherab": { members: 245, landsize: "1250 sq km", clmc: "CLMC Cherab", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Kinna": { members: 200, landsize: "1000 sq km", clmc: "CLMC Kinna", size: "26000 ha", population: 5000, registeredMembers: 3780 }
+    };
+
+    // Sample coordinates for communities (latitude, longitude)
+    const communityCoordinates = {
+      "Lorengippi": [3.0, 35.5],
+      "Turkana West": [3.2, 35.7],
+      "Lokicha": [3.1, 35.6],
+      "Leheley": [1.7, 39.5],
+      "Diff": [1.8, 39.6],
+      "Sabuli": [1.9, 39.7],
+      "Obittu": [2.3, 37.9],
+      "Walda": [2.4, 38.0],
+      "Lokitonyila": [1.2, 35.0],
+      "Kasei": [1.3, 35.1],
+      "Alale": [1.4, 35.2],
+      "Charri": [0.5, 37.6],
+      "Cherab": [0.6, 37.7],
+      "Kinna": [0.7, 37.8]
+    };
+
+    const map = L.map('map-container').setView([1.5, 37.5], 6); // Center on Kenya
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const markers = {};
+
+    // Add markers for each community
+    Object.entries(communityCoordinates).forEach(([name, coords]) => {
+      const marker = L.marker(coords).addTo(map);
+      marker.bindPopup(`
+        <div style="width: 260px; background: #eef6fb; border: 1px solid #2BC0E4; border-radius: 8px; padding: 8px;">
+          <h3 style="margin-top: 0;">${name}</h3>
+          <table style="border-collapse: collapse; width: 100%;">
+            <tr>
+              <th style="text-align: left; padding: 4px; border-bottom: 1px solid #2BC0E4;">Size</th>
+              <td style="padding: 4px; border-bottom: 1px solid #2BC0E4;">${communityData[name].size}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left; padding: 4px; border-bottom: 1px solid #2BC0E4;">Population</th>
+              <td style="padding: 4px; border-bottom: 1px solid #2BC0E4;">${communityData[name].population}</td>
+            </tr>
+            <tr>
+              <th style="text-align: left; padding: 4px;">Registered Members</th>
+              <td style="padding: 4px;">${communityData[name].registeredMembers.toLocaleString()}</td>
+            </tr>
+          </table>
+        </div>
+      `);
+      markers[name] = marker;
+      marker.on('click', () => {
+        showDetails(name);
+      });
+    });
+
+    function focusOnCommunity(name) {
+      const marker = markers[name];
+      if (marker) {
+        map.setView(marker.getLatLng(), 10, { animate: true });
+        marker.openPopup();
+        showDetails(name);
+      }
+    }
+
+    function showDetails(community) {
+      const data = communityData[community];
+      const container = document.getElementById('community-info');
+      container.classList.add('active');
+      container.innerHTML = `
+        <h3>Details for ${community}</h3>
+        <table style="border-collapse: collapse; width: 260px; background: #eef6fb; border: 1px solid #2BC0E4; border-radius: 8px;">
+          <tr>
+            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2BC0E4;">Size</th>
+            <td style="padding: 8px; border-bottom: 1px solid #2BC0E4;">${data.size}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2BC0E4;">Population</th>
+            <td style="padding: 8px; border-bottom: 1px solid #2BC0E4;">${data.population}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; padding: 8px;">Registered Members</th>
+            <td style="padding: 8px;">${data.registeredMembers.toLocaleString()}</td>
+          </tr>
+        </table>
+      `;
+    }
+
+    // New code to handle county query parameter and scroll/highlight
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function highlightCounty(countyName) {
+      const counties = document.querySelectorAll('.county');
+      counties.forEach(county => {
+        const h2 = county.querySelector('h2');
+        if (h2.textContent === countyName) {
+          county.style.backgroundColor = '#f7f7d1';
+          county.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          county.style.backgroundColor = 'white';
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const county = getQueryParam('county');
+      if (county) {
+        highlightCounty(county);
+      }
+    });
+    // Add event listeners to community links in the sidebar to show table on map and side panel
+    document.querySelectorAll('.community-list li a').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        const url = new URL(link.href);
+        const community = url.searchParams.get('community');
+        if (community && markers[community]) {
+          map.setView(markers[community].getLatLng(), 10, { animate: true });
+          markers[community].openPopup();
+          showDetails(community);
+        }
+      });
+    });
+  </script>
+  </body>
+  </html>
