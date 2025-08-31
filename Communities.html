@@ -5,112 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Communities</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      display: flex;
-      min-height: 100vh;
-      background-color: #f5f7fb;
-      color: #333;
-    }
-
-    .sidebar {
-      width: 240px;
-      background: linear-gradient(135deg, #e4d12b, #EAECC6);
-      color: white;
-      padding: 30px 20px;
-    }
-
-    .sidebar h2 {
-      margin-bottom: 30px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .sidebar ul {
-      list-style: none;
-    }
-
-    .sidebar ul li {
-      margin-bottom: 20px;
-    }
-
-    .sidebar ul li a {
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-    }
-
-    .sidebar ul li a:hover {
-      opacity: 0.8;
-    }
-
-    .main {
-      flex: 1;
-      padding: 30px;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .county {
-      background: white;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-
-    .county h2 {
-      color: #e4ce2b;
-      margin-bottom: 10px;
-    }
-
-    .community-list {
-      margin-left: 20px;
-    }
-
-    .community-list li {
-      margin-bottom: 6px;
-      cursor: pointer;
-      color: #007acc;
-    }
-
-    .community-list li:hover {
-      text-decoration: underline;
-    }
-
-    .community-details {
-      margin-top: 10px;
-      padding: 15px;
-      background: #eef6fb;
-      border-left: 5px solid #2BC0E4;
-      border-radius: 8px;
-      display: none;
-    }
-
-    .community-details.active {
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        display: none;
-      }
-
-      .main {
-        padding: 20px;
-      }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { display: flex; min-height: 100vh; background-color: #f5f7fb; color: #333; }
+    .sidebar { width: 240px; background: linear-gradient(135deg, #e4d12b, #EAECC6); color: white; padding: 30px 20px; }
+    .sidebar h2 { margin-bottom: 30px; font-size: 24px; font-weight: bold; }
+    .sidebar ul { list-style: none; }
+    .sidebar ul li { margin-bottom: 20px; }
+    .sidebar ul li a { text-decoration: none; color: white; font-size: 16px; display: flex; align-items: center; }
+    .sidebar ul li a:hover { opacity: 0.8; }
+    .main { flex: 1; padding: 30px; }
+    h1 { font-size: 28px; margin-bottom: 20px; }
+    .county { background: white; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .county h2 { color: #e4ce2b; margin-bottom: 10px; }
+    .community-list { margin-left: 20px; }
+    .community-list li { margin-bottom: 6px; cursor: pointer; color: #007acc; }
+    .community-list li:hover { text-decoration: underline; }
+    .community-details { margin-top: 10px; padding: 15px; background: #eef6fb; border-left: 5px solid #2BC0E4; border-radius: 8px; display: none; }
+    .community-details.active { display: block; }
+    @media (max-width: 768px) { .sidebar { display: none; } .main { padding: 20px; } }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
@@ -160,7 +72,7 @@
     <div class="county">
       <h2>West Pokot</h2>
       <ul class="community-list">
-        <li><a href="dashboard.html?community=Lokitonyila">Lokitonyila</a></li>
+        <li><a href="dashboard.html?community=Lokitonyala">Lokitonyala</a></li>
         <li><a href="dashboard.html?community=Kasei">Kasei</a></li>
         <li><a href="dashboard.html?community=Alale">Alale</a></li>
       </ul>
@@ -183,83 +95,102 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
+    // --- DATA ---
     const communityData = {
       "Lorengippi": { members: 250, landsize: "1200 sq km", clmc: "CLMC Lorengippi", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Turkana West": { members: 340, landsize: "1500 sq km", clmc: "CLMC Turkana West", size: "26000 ha", population: 5000, registeredMembers: 3780 },
-      "Lokichar": { members: 190, landsize: "980 sq km", clmc: "CLMC Lokicha", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+      "Lokichar": { members: 190, landsize: "980 sq km", clmc: "CLMC Lokichar", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+
       "Leheley": { members: 220, landsize: "1100 sq km", clmc: "CLMC Leheley", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Diff": { members: 300, landsize: "1230 sq km", clmc: "CLMC Diff", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Sabuli": { members: 280, landsize: "1050 sq km", clmc: "CLMC Sabuli", size: "26000 ha", population: 5000, registeredMembers: 3780 },
-      "Obittu": { members: 170, landsize: "900 sq km", clmc: "CLMC Obittu", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+
+      "Obittu": { members: 170, landsize: "900 sq km", clmc: "CLMC Obittu", size: "26000 ha", population: 5000, registeredMembers: 3780 }, // coords pending verification
       "Walda": { members: 210, landsize: "1120 sq km", clmc: "CLMC Walda", size: "26000 ha", population: 5000, registeredMembers: 3780 },
-      "Lokitonyila": { members: 195, landsize: "950 sq km", clmc: "CLMC Lokitonyila", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+
+      "Lokitonyala": { members: 195, landsize: "950 sq km", clmc: "CLMC Lokitonyala", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Kasei": { members: 230, landsize: "1180 sq km", clmc: "CLMC Kasei", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Alale": { members: 260, landsize: "1300 sq km", clmc: "CLMC Alale", size: "26000 ha", population: 5000, registeredMembers: 3780 },
+
       "Charri": { members: 180, landsize: "870 sq km", clmc: "CLMC Charri", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Cherab": { members: 245, landsize: "1250 sq km", clmc: "CLMC Cherab", size: "26000 ha", population: 5000, registeredMembers: 3780 },
       "Kinna": { members: 200, landsize: "1000 sq km", clmc: "CLMC Kinna", size: "26000 ha", population: 5000, registeredMembers: 3780 }
     };
 
-    // Sample coordinates for communities (latitude, longitude)
+    // Verified coordinates (lat, lng). Obittu left out until verified.
     const communityCoordinates = {
-      "Lorengippi": [3.0, 35.5],
-      "Turkana West": [3.2, 35.7],
-      "Lokicha": [3.1, 35.6],
-      "Leheley": [1.7, 39.5],
-      "Diff": [1.8, 39.6],
-      "Sabuli": [1.9, 39.7],
-      "Obittu": [2.3, 37.9],
-      "Walda": [2.4, 38.0],
-      "Lokitonyila": [1.2, 35.0],
-      "Kasei": [1.3, 35.1],
-      "Alale": [1.4, 35.2],
-      "Charri": [0.5, 37.6],
-      "Cherab": [0.6, 37.7],
-      "Kinna": [0.7, 37.8]
+      // TURKANA
+      "Lorengippi": [2.5705, 34.9889],        // MapCoords
+      "Turkana West": [3.7168, 34.9589],      // Kakuma town as sub-county HQ
+      "Lokichar": [2.3810, 35.6250],          // Lokichar
+
+      // WAJIR
+      "Leheley": [1.62759, 40.00681],         // Leheley
+      "Diff": [1.0000, 40.9600],              // Diff
+      "Sabuli": [2.0883, 40.0223],            // Sabuli
+
+      // MARSABIT
+      // "Obittu": [/* pending */],
+      "Walda": [2.1310, 37.9210],             // Walda
+
+      // WEST POKOT
+      "Lokitonyala": [2.36122, 34.95148],     // Lokitonyala (correct spelling)
+      "Kasei": [1.97343, 35.20563],           // Kasei
+      "Alale": [2.3439, 34.9274],             // Alale (user-provided precise point)
+
+      // ISIOLO
+      "Charri": [0.95833, 38.53315],          // Bulesa Dispensary (Chari Ward area)
+      "Cherab": [1.06729, 38.66619],          // Merti town (Cherab/Chari sub-county HQ)
+      "Kinna": [0.318539, 38.193773]          // Kinna
     };
 
-    const map = L.map('map-container').setView([1.5, 37.5], 6); // Center on Kenya
+    // --- MAP ---
+    const map = L.map('map-container', {
+      center: [1.5, 37.5], zoom: 6
+    });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
+    // Explicit icon so markers always show (even from file:// or certain CDNs)
+    const redIcon = new L.Icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+      iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+    });
+
     const markers = {};
 
-    // Add markers for each community
+    // Add markers for each community with verified coordinates
     Object.entries(communityCoordinates).forEach(([name, coords]) => {
-      const marker = L.marker(coords).addTo(map);
+      const marker = L.marker(coords, { icon: redIcon }).addTo(map);
       marker.bindPopup(`
         <div style="width: 260px; background: #eef6fb; border: 1px solid #2BC0E4; border-radius: 8px; padding: 8px;">
           <h3 style="margin-top: 0;">${name}</h3>
           <table style="border-collapse: collapse; width: 100%;">
-            <tr>
-              <th style="text-align: left; padding: 4px; border-bottom: 1px solid #2BC0E4;">Size</th>
-              <td style="padding: 4px; border-bottom: 1px solid #2BC0E4;">${communityData[name].size}</td>
-            </tr>
-            <tr>
-              <th style="text-align: left; padding: 4px; border-bottom: 1px solid #2BC0E4;">Population</th>
-              <td style="padding: 4px; border-bottom: 1px solid #2BC0E4;">${communityData[name].population}</td>
-            </tr>
-            <tr>
-              <th style="text-align: left; padding: 4px;">Registered Members</th>
-              <td style="padding: 4px;">${communityData[name].registeredMembers.toLocaleString()}</td>
-            </tr>
+            <tr><th style="text-align: left; padding: 4px; border-bottom: 1px solid #2BC0E4;">Size</th>
+                <td style="padding: 4px; border-bottom: 1px solid #2BC0E4;">${communityData[name]?.size ?? '—'}</td></tr>
+            <tr><th style="text-align: left; padding: 4px; border-bottom: 1px solid #2BC0E4;">Population</th>
+                <td style="padding: 4px; border-bottom: 1px solid #2BC0E4;">${communityData[name]?.population ?? '—'}</td></tr>
+            <tr><th style="text-align: left; padding: 4px;">Registered Members</th>
+                <td style="padding: 4px;">${communityData[name]?.registeredMembers?.toLocaleString?.() ?? '—'}</td></tr>
           </table>
         </div>
       `);
       markers[name] = marker;
-      marker.on('click', () => {
-        showDetails(name);
-      });
+      marker.on('click', () => showDetails(name));
     });
 
+    // Focus helpers
     function focusOnCommunity(name) {
       const marker = markers[name];
       if (marker) {
         map.setView(marker.getLatLng(), 10, { animate: true });
         marker.openPopup();
         showDetails(name);
+      } else {
+        alert('Coordinates for "' + name + '" are pending verification.');
       }
     }
 
@@ -270,23 +201,17 @@
       container.innerHTML = `
         <h3>Details for ${community}</h3>
         <table style="border-collapse: collapse; width: 260px; background: #eef6fb; border: 1px solid #2BC0E4; border-radius: 8px;">
-          <tr>
-            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2BC0E4;">Size</th>
-            <td style="padding: 8px; border-bottom: 1px solid #2BC0E4;">${data.size}</td>
-          </tr>
-          <tr>
-            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2BC0E4;">Population</th>
-            <td style="padding: 8px; border-bottom: 1px solid #2BC0E4;">${data.population}</td>
-          </tr>
-          <tr>
-            <th style="text-align: left; padding: 8px;">Registered Members</th>
-            <td style="padding: 8px;">${data.registeredMembers.toLocaleString()}</td>
-          </tr>
+          <tr><th style="text-align: left; padding: 8px; border-bottom: 1px solid #2BC0E4;">Size</th>
+              <td style="padding: 8px; border-bottom: 1px solid #2BC0E4;">${data?.size ?? '—'}</td></tr>
+          <tr><th style="text-align: left; padding: 8px; border-bottom: 1px solid #2BC0E4;">Population</th>
+              <td style="padding: 8px; border-bottom: 1px solid #2BC0E4;">${data?.population ?? '—'}</td></tr>
+          <tr><th style="text-align: left; padding: 8px;">Registered Members</th>
+              <td style="padding: 8px;">${data?.registeredMembers?.toLocaleString?.() ?? '—'}</td></tr>
         </table>
       `;
     }
 
-    // New code to handle county query parameter and scroll/highlight
+    // Query param helpers
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
@@ -307,21 +232,16 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       const county = getQueryParam('county');
-      if (county) {
-        highlightCounty(county);
-      }
+      if (county) highlightCounty(county);
     });
-    // Add event listeners to community links in the sidebar to show table on map and side panel
+
+    // Intercept community links so the page doesn't reload; focus on the marker instead.
     document.querySelectorAll('.community-list li a').forEach(link => {
       link.addEventListener('click', event => {
         event.preventDefault();
         const url = new URL(link.href);
         const community = url.searchParams.get('community');
-        if (community && markers[community]) {
-          map.setView(markers[community].getLatLng(), 10, { animate: true });
-          markers[community].openPopup();
-          showDetails(community);
-        }
+        focusOnCommunity(community);
       });
     });
   </script>
