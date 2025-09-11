@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources</title>
+  <style>
+    body { display: flex; min-height: 100vh; background-color: #f5f7fb; font-family: 'Segoe UI', sans-serif; margin:0; }
+    .sidebar { width: 240px; background: linear-gradient(135deg, #e4d12b, #EAECC6); padding: 30px 20px; color:white; }
+    .sidebar h2 { margin-bottom: 30px; font-size: 22px; font-weight: bold; }
+    .sidebar ul { list-style: none; padding:0; }
+    .sidebar ul li { margin-bottom: 20px; }
+    .sidebar ul li a { text-decoration: none; color:white; font-size: 16px; display:flex; align-items:center; }
+    .sidebar ul li a:hover { opacity:0.8; }
+    .main { flex:1; padding:30px; }
+    h1 { font-size: 26px; margin-bottom:20px; }
+
+    /* Accordion style */
+    .accordion { background:white; margin-bottom:15px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08); overflow:hidden; }
+    .accordion-header { padding:16px 20px; font-size:18px; font-weight:600; cursor:pointer; background:#fff; display:flex; justify-content:space-between; align-items:center; }
+    .accordion-header:hover { background:#f0f0f0; }
+    .accordion-content { display:none; padding:10px 20px 20px; background:#fafafa; }
+    .accordion-content ul { list-style:none; padding:0; }
+    .accordion-content li { margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+    .download-btn { background:#2BC0E4; color:white; padding:6px 12px; border-radius:6px; text-decoration:none; font-size:14px; }
+    .download-btn:hover { background:#1a9bbd; }
+    .arrow { transition: transform 0.3s ease; }
+    .accordion.open .arrow { transform: rotate(90deg); }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>DLCI Dashboard</h2>
+    <ul>
+      <li><a href="dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="communities.html">🌍 Communities</a></li>
+      <li><a href="users.html">🧑 Users</a></li>
+      <li><a href="resources.html">📚 Resources</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>📚 Resource Library</h1>
+
+    <!-- Gazette Notices -->
+    <div class="accordion">
+      <div class="accordion-header">Gazette Notices <span class="arrow">▶</span></div>
+      <div class="accordion-content">
+        <ul>
+          <li>
+            <span>Gazette Notice 2021-01</span>
+            <a href="pdfs/gazette-notice-2021-01.pdf" class="download-btn" download>Download</a>
+          </li>
+          <li>
+            <span>Gazette Notice 2021-02</span>
+            <a href="pdfs/gazette-notice-2021-02.pdf" class="download-btn" download>Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Community Land Act -->
+    <div class="accordion">
+      <div class="accordion-header">Community Land Act <span class="arrow">▶</span></div>
+      <div class="accordion-content">
+        <ul>
+          <li>
+            <span>Community Land Act (2016)</span>
+            <a href="pdfs/community-land-act.pdf" class="download-btn" download>Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CLMC Training Manuals -->
+    <div class="accordion">
+      <div class="accordion-header">CLMC Training Manuals <span class="arrow">▶</span></div>
+      <div class="accordion-content">
+        <ul>
+          <li>
+            <span>CLMC Training Manual v1</span>
+            <a href="pdfs/clmc-training-v1.pdf" class="download-btn" download>Download</a>
+          </li>
+          <li>
+            <span>CLMC Training Manual v2</span>
+            <a href="pdfs/clmc-training-v2.pdf" class="download-btn" download>Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Advertisements -->
+    <div class="accordion">
+      <div class="accordion-header">Advertisements <span class="arrow">▶</span></div>
+      <div class="accordion-content">
+        <ul>
+          <li>
+            <span>Advertisement - Jan 2022</span>
+            <a href="pdfs/advert-jan-2022.pdf" class="download-btn" download>Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple accordion logic
+    document.querySelectorAll(".accordion-header").forEach(header => {
+      header.addEventListener("click", () => {
+        const accordion = header.parentElement;
+        accordion.classList.toggle("open");
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+
+</body>
+</html>
