@@ -1,0 +1,117 @@
+{
+  "counties": {
+    "Turkana": {
+      "slug": "turkana",
+      "communities": [
+        { "name": "Lorengippi", "slug": "lorengippi", "status": "red", "size": "1,200 sq km", "population": 5000, "registeredMembers": 3780, "lat": 2.5705, "lng": 34.9889, "adjudicationStart": "2019-03-01", "registrationDate": null, "description": "Lorengippi community sits in the arid lowlands of Turkana County, practising traditional agro-pastoralism along seasonal rivers." },
+        { "name": "Turkana West", "slug": "turkana-west", "status": "red", "size": "1,500 sq km", "population": 5000, "registeredMembers": 3780, "lat": 3.7168, "lng": 34.9589, "adjudicationStart": "2020-06-01", "registrationDate": null, "description": "Turkana West covers vast rangelands used by Turkana pastoralists for seasonal cattle and camel grazing." },
+        { "name": "Lokichar", "slug": "lokichar", "status": "red", "size": "980 sq km", "population": 5000, "registeredMembers": 3780, "lat": 2.3810, "lng": 35.6250, "adjudicationStart": "2020-01-15", "registrationDate": null, "description": "Lokichar sits near the site of major oil discoveries, making secure community land rights especially urgent." },
+        { "name": "Kapese", "slug": "kapese", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 2.4839, "lng": 35.6970, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Nakukulas", "slug": "nakukulas", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 1.9048, "lng": 35.9253, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Lokwii", "slug": "lokwii", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 1.9842, "lng": 36.1053, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Kangitit", "slug": "kangitit", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 1.9541, "lng": 36.0295, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Lokapel", "slug": "lokapel", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 2.3681, "lng": 35.4258, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    },
+    "Wajir": {
+      "slug": "wajir",
+      "communities": [
+        { "name": "Leheley", "slug": "leheley", "status": "orange", "size": "1,100 sq km", "population": 5000, "registeredMembers": 3780, "lat": 1.62759, "lng": 40.00681, "adjudicationStart": "2018-09-01", "registrationDate": null, "description": "Leheley is a pastoral community in Wajir County, with grazing lands extending towards the Somali border." },
+        { "name": "Diff", "slug": "diff", "status": "orange", "size": "1,230 sq km", "population": 5000, "registeredMembers": 3780, "lat": 1.0000, "lng": 40.9600, "adjudicationStart": "2019-02-01", "registrationDate": null, "description": "" },
+        { "name": "Sabuli", "slug": "sabuli", "status": "orange", "size": "1,050 sq km", "population": 5000, "registeredMembers": 3780, "lat": 2.0883, "lng": 40.0223, "adjudicationStart": "2019-05-01", "registrationDate": null, "description": "" }
+      ]
+    },
+    "Marsabit": {
+      "slug": "marsabit",
+      "communities": [
+        { "name": "Obbu", "slug": "obbu", "status": "orange", "size": "26,000 ha", "population": 5000, "registeredMembers": 3780, "lat": 3.04, "lng": 38.76, "adjudicationStart": "2017-11-01", "registrationDate": null, "description": "Obbu is a Gabra pastoral community in northern Marsabit, managing vast dry-season grazing reserves." },
+        { "name": "Obittu", "slug": "obittu", "status": "orange", "size": "40,000 ha", "population": 6000, "registeredMembers": 4000, "lat": 2.3000, "lng": 37.9000, "adjudicationStart": "2018-03-01", "registrationDate": null, "description": "" },
+        { "name": "Walda", "slug": "walda", "status": "orange", "size": "1,120 sq km", "population": 5000, "registeredMembers": 3780, "lat": 2.1310, "lng": 37.9210, "adjudicationStart": "2018-07-01", "registrationDate": null, "description": "" }
+      ]
+    },
+    "West Pokot": {
+      "slug": "west-pokot",
+      "communities": [
+        { "name": "Lokitonyala", "slug": "lokitonyala", "status": "orange", "size": "950 sq km", "population": 5000, "registeredMembers": 3780, "lat": 2.36122, "lng": 34.95148, "adjudicationStart": "2019-08-01", "registrationDate": null, "description": "" },
+        { "name": "Kasei", "slug": "kasei", "status": "red", "size": "1,180 sq km", "population": 5000, "registeredMembers": 3780, "lat": 1.97343, "lng": 35.20563, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Alale", "slug": "alale", "status": "orange", "size": "1,300 sq km", "population": 5000, "registeredMembers": 3780, "lat": 2.3439, "lng": 34.9274, "adjudicationStart": "2020-01-01", "registrationDate": null, "description": "Alale is a cross-border pastoral community straddling the Kenya-Uganda frontier." },
+        { "name": "Chesra", "slug": "chesra", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.4464, "lng": 35.1378, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Chemwochoi B", "slug": "chemwochoi-b", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.3708, "lng": 35.1131, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ortum West", "slug": "ortum-west", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.4542, "lng": 35.3061, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Nakwijit", "slug": "nakwijit", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.6717, "lng": 35.1869, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Sobukwo", "slug": "sobukwo", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.4614, "lng": 35.3356, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Kiwawa", "slug": "kiwawa", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 2.0256, "lng": 34.9939, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Kases", "slug": "kases", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 2.1320, "lng": 35.0603, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Chelopoy", "slug": "chelopoy", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": 2.0100, "lng": 35.0842, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    },
+    "Isiolo": {
+      "slug": "isiolo",
+      "communities": [
+        { "name": "Charri", "slug": "charri", "status": "orange", "size": "870 sq km", "population": 5000, "registeredMembers": 3780, "lat": 0.95833, "lng": 38.53315, "adjudicationStart": "2018-10-01", "registrationDate": null, "description": "" },
+        { "name": "Cherab", "slug": "cherab", "status": "orange", "size": "1,250 sq km", "population": 5000, "registeredMembers": 3780, "lat": 1.06729, "lng": 38.66619, "adjudicationStart": "2018-12-01", "registrationDate": null, "description": "" },
+        { "name": "Kinna - Kulamawe - Gotu Dedha", "slug": "kinna-kulamawe-gotu-dedha", "status": "orange", "size": "1,000 sq km", "population": 5000, "registeredMembers": 3780, "lat": 0.318539, "lng": 38.193773, "adjudicationStart": "2019-01-01", "registrationDate": null, "description": "" }
+      ]
+    },
+    "Garissa": {
+      "slug": "garissa",
+      "communities": [
+        { "name": "Kamuthe", "slug": "kamuthe", "status": "green", "size": "40,000 ha", "population": 6000, "registeredMembers": 4000, "lat": -0.7322, "lng": 39.8337, "adjudicationStart": "2016-04-01", "registrationDate": "2021-08-15", "description": "Kamuthe is one of the first communities in Garissa to achieve full registration under the Community Land Act 2016 — a landmark for the region." }
+      ]
+    },
+    "Samburu": {
+      "slug": "samburu",
+      "communities": [
+        { "name": "Nairimirimo", "slug": "nairimirimo", "status": "green", "size": "40,000 ha", "population": 3000, "registeredMembers": 1647, "lat": 1.243904, "lng": 36.974541, "adjudicationStart": "2016-01-01", "registrationDate": "2020-11-20", "description": "Nairimirimo was among the pioneer communities registered under Kenya's Community Land Act, demonstrating what sustained advocacy can achieve." },
+        { "name": "Arisim", "slug": "arisim", "status": "green", "size": "55,000 ha", "population": 30000, "registeredMembers": 9000, "lat": 1.85414, "lng": 37.13594, "adjudicationStart": "2016-06-01", "registrationDate": "2021-03-10", "description": "Arisim is the largest registered community in Samburu, covering expansive dry-season grazing corridors critical to Samburu pastoralists." },
+        { "name": "Ngutuk Ongiron", "slug": "ngutuk-ongiron", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.7019, "lng": 37.3481, "adjudicationStart": "2020-03-01", "registrationDate": null, "description": "" },
+        { "name": "Girgir", "slug": "girgir", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.6622, "lng": 37.6681, "adjudicationStart": "2020-05-01", "registrationDate": null, "description": "" },
+        { "name": "Lpus", "slug": "lpus", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.9344, "lng": 37.0606, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Sesia", "slug": "sesia", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.8197, "lng": 37.1672, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ltirimin", "slug": "ltirimin", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.8392, "lng": 37.0508, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ngilai Central", "slug": "ngilai-central", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.4108, "lng": 37.2131, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ngilai West", "slug": "ngilai-west", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.4108, "lng": 37.2131, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Tinga B", "slug": "tinga-b", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.0689, "lng": 36.4970, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Nkaroni", "slug": "nkaroni", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.9478, "lng": 37.1986, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ngilai", "slug": "ngilai", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 1.1628, "lng": 37.4942, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    },
+    "Laikipia": {
+      "slug": "laikipia",
+      "communities": [
+        { "name": "Kijabe", "slug": "kijabe", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Munishoi", "slug": "munishoi", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ilmotiok", "slug": "ilmotiok", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.4867, "lng": 36.9531, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Tiamamut", "slug": "tiamamut", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.3931, "lng": 37.1636, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Koija", "slug": "koija", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Inkiloriti", "slug": "inkiloriti", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Kurikuri", "slug": "kurikuri", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.4617, "lng": 37.2067, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Murupusi", "slug": "murupusi", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Lekurruki", "slug": "lekurruki", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.4989, "lng": 37.3181, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ilngwesi I", "slug": "ilngwesi-i", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ilngwesi II - Mayianat", "slug": "ilngwesi-ii-mayianat", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Ilpolei", "slug": "ilpolei", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.4108, "lng": 37.0603, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Musul", "slug": "musul", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": 0.4261, "lng": 37.0342, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    },
+    "Baringo": {
+      "slug": "baringo",
+      "communities": [
+        { "name": "Paka", "slug": "paka", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" },
+        { "name": "Kokwa Island", "slug": "kokwa-island", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    },
+    "Kajiado": {
+      "slug": "kajiado",
+      "communities": [
+        { "name": "Shompole", "slug": "shompole", "status": "red", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    },
+    "Tana River": {
+      "slug": "tana-river",
+      "communities": [
+        { "name": "Wayu Daba", "slug": "wayu-daba", "status": "orange", "size": "—", "population": null, "registeredMembers": null, "lat": null, "lng": null, "adjudicationStart": null, "registrationDate": null, "description": "" }
+      ]
+    }
+  }
+}
