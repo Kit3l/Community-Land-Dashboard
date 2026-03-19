@@ -306,14 +306,54 @@
       flex:1;
       background:#fff;
       border-top:1px solid rgba(0,0,0,0.06);
-      padding:14px;
-      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      min-height: 0;
     }
 
-    .details-title {
-      font-weight:800;
-      margin-bottom:8px;
+    /* Toggle tab bar */
+    .details-tabbar {
+      display:flex;
+      align-items:center;
+      gap:0;
+      border-bottom:1px solid rgba(0,0,0,0.07);
+      background:#fafafa;
+      flex-shrink:0;
     }
+
+    .details-tab {
+      padding:10px 18px;
+      font-size:13px;
+      font-weight:700;
+      color:#666;
+      border:none;
+      background:transparent;
+      cursor:pointer;
+      border-bottom:3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .details-tab.active {
+      color:#111;
+      border-bottom-color: var(--dlci-yellow);
+      background:#fff;
+    }
+
+    .details-tab:hover:not(.active) {
+      color:#333;
+      background:rgba(0,0,0,0.02);
+    }
+
+    /* Panels inside details area */
+    .details-panel {
+      display:none;
+      padding:14px;
+      overflow:auto;
+      flex:1;
+    }
+
+    .details-panel.active { display:block; }
 
     .details-content {
       display:flex;
@@ -328,6 +368,59 @@
       padding:10px;
       border:1px solid #2BC0E4;
     }
+
+    /* ── STATS PANEL ──────────────────────────────────────────────── */
+    .stats-grid {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .stat-card {
+      border-radius:8px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+    }
+
+    .stat-card.total { background:#f5f7fb; border:1px solid rgba(0,0,0,0.07); }
+    .stat-card.s-green  { background:#eaf3de; border:1px solid #97c459; }
+    .stat-card.s-orange { background:#faeeda; border:1px solid #EF9F27; }
+    .stat-card.s-red    { background:#fcebeb; border:1px solid #f09595; }
+
+    .stat-num  { font-size:26px; font-weight:800; color:#111; line-height:1; }
+    .stat-label { font-size:12px; font-weight:700; color:#555; }
+    .stat-sub   { font-size:11px; color:#888; margin-top:2px; }
+
+    .stat-bar { height:5px; border-radius:3px; background:rgba(0,0,0,0.08); overflow:hidden; margin-top:5px; }
+    .stat-bar-fill { height:100%; border-radius:3px; }
+
+    .county-breakdown { border-radius:8px; overflow:hidden; border:1px solid rgba(0,0,0,0.07); font-size:13px; }
+    .cb-header {
+      display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
+      padding:8px 12px; background:#f5f7fb;
+      font-size:11px; font-weight:700; color:#888;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .cb-row {
+      display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
+      padding:8px 12px; border-bottom:1px solid rgba(0,0,0,0.04);
+      align-items:center; transition: background 0.1s;
+    }
+    .cb-row:last-child { border-bottom:none; }
+    .cb-row:hover { background:#f9fafb; }
+    .cb-num { text-align:center; font-weight:700; }
+    .cb-pill {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:28px; height:20px; border-radius:10px;
+      font-size:11px; font-weight:700; margin:auto;
+    }
+    .cb-pill.g { background:#c0dd97; color:#27500a; }
+    .cb-pill.o { background:#FAC775; color:#633806; }
+    .cb-pill.r { background:#f7c1c1; color:#791f1f; }
+    .cb-pill.z { background:rgba(0,0,0,0.06); color:#888; }
 
     @media (max-width: 1000px) {
       :root { --sidebar-width: 38vw; }
@@ -407,10 +500,13 @@
         </div>
       </section>
 
-      <section class="details-area" aria-label="Details area">
-        <div class="details-title">Community details</div>
-        <div id="details-wrapper" class="details-content">
-          <div class="detail-card">Click a pin or a community to see details here.</div>
+      <section class="details-area" aria-label="Summary statistics">
+        <div class="details-tabbar">
+          <div class="details-tab active" style="cursor:default;pointer-events:none;">📊 Summary statistics</div>
+        </div>
+        <div class="details-panel active" id="panel-stats">
+          <div class="stats-grid" id="stats-grid"></div>
+          <div class="county-breakdown" id="county-breakdown"></div>
         </div>
       </section>
     </main>
@@ -570,6 +666,33 @@
     };
 
     /*************************************************************************
+     * COMMUNITY PAGE URL HELPERS
+     *************************************************************************/
+    const countySlugMap = {
+      'Turkana': 'turkana', 'Wajir': 'wajir', 'Marsabit': 'marsabit',
+      'West Pokot': 'west-pokot', 'Isiolo': 'isiolo', 'Garissa': 'garissa',
+      'Samburu': 'samburu', 'Laikipia': 'laikipia', 'Baringo': 'baringo',
+      'Kajiado': 'kajiado', 'Tana River': 'tana-river'
+    };
+
+    function communitySlug(name) {
+      return name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+    }
+
+    function countyForCommunity(name) {
+      for (const [county, comms] of Object.entries(counties)) {
+        if (comms.includes(name)) return county;
+      }
+      return '';
+    }
+
+    function communityPageUrl(name) {
+      const county = countyForCommunity(name);
+      if (!county) return null;
+      return `communities/${countySlugMap[county]}/${communitySlug(name)}.html`;
+    }
+
+    /*************************************************************************
      * MAP
      *************************************************************************/
     const map = L.map('leaflet-map', { center: [1.5, 37.5], zoom: 6, minZoom:5 });
@@ -600,20 +723,46 @@
 
         const data = communityData[name] || {};
         const statusText = color === 'green' ? '✅ Registered' : color === 'orange' ? '🟠 Adjudicated (not complete)' : '🔴 Un-adjudicated';
+        const statusColor = color === 'green' ? '#2e7d32' : color === 'orange' ? '#ef6c00' : '#c62828';
+        const statusBg = color === 'green' ? '#e8f5e9' : color === 'orange' ? '#fff3e0' : '#ffebee';
+        const profileUrl = communityPageUrl(name);
+
         const popupHtml = `
-          <div style="width:280px;">
-            <h3 style="margin:0 0 6px 0;">${name}</h3>
-            <table style="width:100%;border-collapse:collapse;font-size:13px">
-              <tr><td style="font-weight:700;padding:4px 6px;width:38%;">Size</td><td style="padding:4px 6px">${data.size ?? '—'}</td></tr>
-              <tr><td style="font-weight:700;padding:4px 6px;">Population</td><td style="padding:4px 6px">${data.population ?? '—'}</td></tr>
-              <tr><td style="font-weight:700;padding:4px 6px;">Members</td><td style="padding:4px 6px">${data.registeredMembers ?? '—'}</td></tr>
-              <tr><td style="font-weight:700;padding:4px 6px;">Status</td><td style="padding:4px 6px;">${statusText}</td></tr>
-            </table>
+          <div style="width:300px;font-family:'Segoe UI',sans-serif;">
+            <div style="background:#111;padding:14px 16px;margin:-1px -1px 0 -1px;border-radius:4px 4px 0 0;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#e4d12b;margin-bottom:4px;">${countyForCommunity(name)} County</div>
+              <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.1;">${name}</div>
+            </div>
+            <div style="padding:12px 16px;background:#fff;border:1px solid #eee;border-top:none;">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:12px;background:${statusBg};margin-bottom:10px;">
+                <span style="width:8px;height:8px;border-radius:50%;background:${statusColor};display:inline-block;"></span>
+                <span style="font-size:12px;font-weight:700;color:${statusColor};">${statusText}</span>
+              </div>
+              <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px;">
+                <tr style="border-bottom:1px solid #f5f5f5;">
+                  <td style="font-weight:700;padding:5px 0;color:#666;width:42%;">Area</td>
+                  <td style="padding:5px 0;color:#111;">${data.size ?? '—'}</td>
+                </tr>
+                <tr style="border-bottom:1px solid #f5f5f5;">
+                  <td style="font-weight:700;padding:5px 0;color:#666;">Population</td>
+                  <td style="padding:5px 0;color:#111;">${data.population ? data.population.toLocaleString() : '—'}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;padding:5px 0;color:#666;">Members</td>
+                  <td style="padding:5px 0;color:#111;">${data.registeredMembers ? data.registeredMembers.toLocaleString() : '—'}</td>
+                </tr>
+              </table>
+              ${profileUrl ? `<a href="${profileUrl}" target="_blank" style="display:block;text-align:center;padding:9px 16px;background:#111;color:#e4d12b;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'">View full profile →</a>` : '<div style="font-size:12px;color:#aaa;text-align:center;padding:4px 0;">Profile page coming soon</div>'}
+            </div>
           </div>
         `;
 
-        marker.bindPopup(popupHtml);
-        marker.on('click', () => showDetails(name));
+        marker.bindPopup(popupHtml, { maxWidth: 320 });
+        marker.on('click', () => {
+          expandCountyForCommunity(name);
+          const color2 = pinColorsByName[name] || 'red';
+          if (activeFilter !== 'all' && color2 !== activeFilter) applyFilter('all');
+        });
         markers[name] = marker;
       } catch (err) {
         console.warn("Failed to add marker for", name, err);
@@ -705,12 +854,15 @@
         list.className = 'communities-list';
         comms.forEach(c => {
           const a = document.createElement('a');
-          a.href = `?community=${encodeURIComponent(c)}`;
+          const profileUrl = communityPageUrl(c);
+          if (profileUrl) {
+            a.href = profileUrl;
+            a.target = '_blank';
+          } else {
+            a.href = `?community=${encodeURIComponent(c)}`;
+            a.addEventListener('click', (ev) => { ev.preventDefault(); focusOnCommunity(c); });
+          }
           a.textContent = c;
-          a.addEventListener('click', (ev) => {
-            ev.preventDefault();
-            focusOnCommunity(c);
-          });
           list.appendChild(a);
         });
 
@@ -880,6 +1032,81 @@
         map.fitBounds(group.getBounds().pad(0.08));
       }
     })();
+
+    // Tab switching removed — stats panel is permanent
+
+    /*************************************************************************
+     * STATS PANEL: compute and render on load
+     *************************************************************************/
+    (function buildStats() {
+      const allCommunities = Array.from(new Set(Object.values(counties).flat()));
+      let green = 0, orange = 0, red = 0;
+
+      const countyStats = {};
+      Object.entries(counties).forEach(([county, comms]) => {
+        countyStats[county] = { total: comms.length, green: 0, orange: 0, red: 0 };
+        comms.forEach(c => {
+          const col = pinColorsByName[c] || "red";
+          countyStats[county][col]++;
+          if (col === "green") green++;
+          else if (col === "orange") orange++;
+          else red++;
+        });
+      });
+
+      const total = allCommunities.length;
+
+      const statsGrid = document.getElementById("stats-grid");
+      statsGrid.innerHTML = `
+        <div class="stat-card total">
+          <div class="stat-num">${total}</div>
+          <div class="stat-label">Total communities</div>
+          <div class="stat-sub">${Object.keys(counties).length} counties</div>
+        </div>
+        <div class="stat-card s-green">
+          <div class="stat-num" style="color:#3B6D11">${green}</div>
+          <div class="stat-label" style="color:#3B6D11">Registered</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(green/total*100)}%;background:#639922"></div></div>
+          <div class="stat-sub">${Math.round(green/total*100)}% of total</div>
+        </div>
+        <div class="stat-card s-orange">
+          <div class="stat-num" style="color:#854F0B">${orange}</div>
+          <div class="stat-label" style="color:#854F0B">Adjudicated</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(orange/total*100)}%;background:#EF9F27"></div></div>
+          <div class="stat-sub">${Math.round(orange/total*100)}% of total</div>
+        </div>
+        <div class="stat-card s-red">
+          <div class="stat-num" style="color:#A32D2D">${red}</div>
+          <div class="stat-label" style="color:#A32D2D">Un-adjudicated</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(red/total*100)}%;background:#e24b4a"></div></div>
+          <div class="stat-sub">${Math.round(red/total*100)}% of total</div>
+        </div>
+      `;
+
+      const breakdown = document.getElementById("county-breakdown");
+      const rows = Object.entries(countyStats).map(([county, s]) => `
+        <div class="cb-row">
+          <span style="font-weight:600">${county}</span>
+          <span class="cb-num">${s.total}</span>
+          <span style="text-align:center">${s.green > 0 ? `<span class="cb-pill g">${s.green}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${s.orange > 0 ? `<span class="cb-pill o">${s.orange}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${s.red > 0 ? `<span class="cb-pill r">${s.red}</span>` : `<span class="cb-pill z">—</span>`}</span>
+        </div>
+      `).join("");
+
+      breakdown.innerHTML = `
+        <div class="cb-header">
+          <span>County</span>
+          <span style="text-align:center">Total</span>
+          <span style="text-align:center;color:#3B6D11">Reg.</span>
+          <span style="text-align:center;color:#854F0B">Adj.</span>
+          <span style="text-align:center;color:#A32D2D">Un-adj.</span>
+        </div>
+        ${rows}
+      `;
+    })();
+
+
 
   </script>
 </body>
