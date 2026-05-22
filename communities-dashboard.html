@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Community Land Dashboard — DLCI</title>
+  <title>DLCI Trust Land Dashboard</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -12,12 +12,12 @@
     :root{
       --dlci-yellow: #e4d12b;
       --sidebar-width: 30vw;
-      --sidebar-fixed-header-height: 240px;
+      --sidebar-fixed-header-height: 260px;
       --map-area: calc(100vh - 40px);
       --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    html,body { height:100%; margin:0; font-family: var(--font-family); background:#f5f7fb; color:#222; }
+    html,body { height:100%; margin:0; font-family: var(--font-family); background:#f7e6d4; color:#1a1a1a; }
 
     .app {
       display: flex;
@@ -32,12 +32,12 @@
       display:flex;
       flex-direction:column;
       border-right: 1px solid rgba(0,0,0,0.06);
-      background: #ffffff;
+      background: #fff8f2;
     }
 
     .sidebar-header {
       height: var(--sidebar-fixed-header-height);
-      background: var(--dlci-yellow);
+      background: #327F5A;
       display:flex;
       padding: 18px;
       gap: 12px;
@@ -49,13 +49,13 @@
       width:64px;
       height:64px;
       border-radius:8px;
-      background: #fff;
+      background: #EED154;
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:700;
-      color: #222;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      color: #1a1a1a;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       flex-shrink:0;
     }
 
@@ -67,23 +67,22 @@
     }
 
     .org-title {
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 800;
-      color: #111;
-      line-height:1.05;
+      color: rgba(255,255,255,0.92);
+      line-height:1.15;
     }
 
     .org-subtitle {
-      font-size: 13px;
+      font-size: 11px;
       font-weight:600;
-      color:#111;
-      opacity:0.9;
+      color: rgba(255,255,255,0.58);
     }
 
     .header-controls {
       display:flex;
       gap:8px;
-      margin-top:8px;
+      margin-top:4px;
       align-items:center;
     }
 
@@ -100,15 +99,15 @@
     }
 
     .btn-communities {
-      background: #111;
-      color: var(--dlci-yellow);
+      background: #E89042;
+      color: #fff;
       font-size:13px;
     }
 
     .btn-resources {
-      background: #fff;
-      color: #111;
-      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
       font-size:13px;
     }
 
@@ -133,23 +132,23 @@
       font-weight: 700;
       font-family: var(--font-family);
       transition: all 0.18s ease;
-      background: rgba(0,0,0,0.08);
-      color: #111;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.88);
       user-select: none;
     }
 
     .legend-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      background: rgba(255,255,255,0.25);
     }
 
-    /* Active / selected state */
     .legend-btn.active {
-      border-color: rgba(0,0,0,0.35);
+      border-color: rgba(255,255,255,0.45);
       box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+      color: #fff;
     }
 
-    /* Dimmed state (a different filter is active) */
     .legend-btn.dimmed {
       opacity: 0.42;
     }
@@ -171,11 +170,18 @@
     .dot.orange { background:#ef6c00; }
     .dot.red { background:#c62828; }
 
-    /* Active bg tints per color */
-    .legend-btn.btn-green.active  { background: rgba(46,125,50,0.18); }
-    .legend-btn.btn-orange.active { background: rgba(239,108,0,0.16); }
-    .legend-btn.btn-red.active    { background: rgba(198,40,40,0.15); }
-    .legend-btn.btn-all.active    { background: rgba(0,0,0,0.12); }
+    .legend-btn.btn-green.active  { background: rgba(46,125,50,0.25); }
+    .legend-btn.btn-orange.active { background: rgba(239,108,0,0.22); }
+    .legend-btn.btn-red.active    { background: rgba(198,40,40,0.20); }
+    .legend-btn.btn-all.active    { background: rgba(255,255,255,0.2); }
+
+    /* Legend description */
+    .legend-desc {
+      margin-top: 8px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.6;
+    }
 
     /* Filter badge on map */
     .filter-badge {
@@ -183,7 +189,7 @@
       top: 10px;
       right: 10px;
       z-index: 1000;
-      background: rgba(255,255,255,0.94);
+      background: rgba(247,230,212,0.95);
       border-radius: 20px;
       padding: 5px 14px;
       font-size: 12px;
@@ -202,7 +208,7 @@
     .sidebar-body {
       padding: 12px 14px;
       overflow:auto;
-      background:#fff;
+      background:#fff8f2;
       flex:1;
     }
 
@@ -218,6 +224,8 @@
       padding:8px 10px;
       border-radius:8px;
       border:1px solid rgba(0,0,0,0.08);
+      background: #f7e6d4;
+      color: #1a1a1a;
       font-size:14px;
     }
 
@@ -225,8 +233,8 @@
       padding:8px 10px;
       border-radius:8px;
       border: none;
-      background: #111;
-      color: var(--dlci-yellow);
+      background: #327F5A;
+      color: #fff;
       cursor:pointer;
       font-weight:700;
     }
@@ -234,16 +242,18 @@
     .counties-title {
       font-weight:800;
       margin:8px 0;
-      color:#111;
-      font-size:14px;
+      color:#6b5a4e;
+      font-size:11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .county {
       border-radius:8px;
       margin-bottom:10px;
       overflow:hidden;
-      border: 1px solid rgba(0,0,0,0.04);
-      background:#fcfcfc;
+      border: 1px solid rgba(0,0,0,0.06);
+      background:#f0d9c2;
     }
 
     .county > button {
@@ -251,19 +261,19 @@
       text-align:left;
       padding:10px 12px;
       border:none;
-      background:#fff;
+      background:#fff8f2;
       display:flex;
       justify-content:space-between;
       align-items:center;
       font-weight:700;
-      color:#111;
+      color:#1a1a1a;
       cursor:pointer;
     }
 
     .communities-list {
       display:none;
       padding:8px 12px 12px 12px;
-      background:#fff;
+      background:#f7e6d4;
     }
 
     .communities-list a {
@@ -271,13 +281,13 @@
       padding:8px;
       border-radius:6px;
       text-decoration:none;
-      color:#0b5aa6;
+      color:#327F5A;
       font-weight:600;
       cursor:pointer;
     }
 
     .communities-list a:hover {
-      background: rgba(14,65,140,0.04);
+      background: rgba(50,127,90,0.1);
     }
 
     /* RIGHT WORKSPACE */
@@ -287,7 +297,7 @@
       flex-direction:column;
       gap:0;
       min-width: 600px;
-      background:#f7f9fb;
+      background:#f7e6d4;
     }
 
     .map-area {
@@ -304,8 +314,8 @@
 
     .details-area {
       flex:1;
-      background:#fff;
-      border-top:1px solid rgba(0,0,0,0.06);
+      background:#fff8f2;
+      border-top:2px solid #327F5A;
       display:flex;
       flex-direction:column;
       overflow:hidden;
@@ -318,7 +328,7 @@
       align-items:center;
       gap:0;
       border-bottom:1px solid rgba(0,0,0,0.07);
-      background:#fafafa;
+      background:#f0d9c2;
       flex-shrink:0;
     }
 
@@ -326,18 +336,18 @@
       padding:10px 18px;
       font-size:13px;
       font-weight:700;
-      color:#666;
+      color:#327F5A;
       border:none;
       background:transparent;
       cursor:pointer;
-      border-bottom:3px solid transparent;
+      border-bottom:3px solid #327F5A;
       transition: color 0.15s, border-color 0.15s;
     }
 
     .details-tab.active {
-      color:#111;
-      border-bottom-color: var(--dlci-yellow);
-      background:#fff;
+      color:#327F5A;
+      border-bottom-color: #327F5A;
+      background:#fff8f2;
     }
 
     .details-tab:hover:not(.active) {
@@ -385,14 +395,14 @@
       gap:3px;
     }
 
-    .stat-card.total { background:#f5f7fb; border:1px solid rgba(0,0,0,0.07); }
-    .stat-card.s-green  { background:#eaf3de; border:1px solid #97c459; }
-    .stat-card.s-orange { background:#faeeda; border:1px solid #EF9F27; }
-    .stat-card.s-red    { background:#fcebeb; border:1px solid #f09595; }
+    .stat-card.total { background:#f0d9c2; border:1px solid rgba(0,0,0,0.07); }
+    .stat-card.s-green  { background:rgba(50,127,90,0.12);  border:1px solid rgba(50,127,90,0.3); }
+    .stat-card.s-orange { background:rgba(232,144,66,0.12); border:1px solid rgba(232,144,66,0.3); }
+    .stat-card.s-red    { background:rgba(171,61,65,0.10);  border:1px solid rgba(171,61,65,0.25); }
 
-    .stat-num  { font-size:26px; font-weight:800; color:#111; line-height:1; }
-    .stat-label { font-size:12px; font-weight:700; color:#555; }
-    .stat-sub   { font-size:11px; color:#888; margin-top:2px; }
+    .stat-num  { font-size:26px; font-weight:800; color:#1a1a1a; line-height:1; }
+    .stat-label { font-size:12px; font-weight:700; color:#6b5a4e; }
+    .stat-sub   { font-size:11px; color:#6b5a4e; margin-top:2px; }
 
     .stat-bar { height:5px; border-radius:3px; background:rgba(0,0,0,0.08); overflow:hidden; margin-top:5px; }
     .stat-bar-fill { height:100%; border-radius:3px; }
@@ -400,8 +410,8 @@
     .county-breakdown { border-radius:8px; overflow:hidden; border:1px solid rgba(0,0,0,0.07); font-size:13px; }
     .cb-header {
       display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
-      padding:8px 12px; background:#f5f7fb;
-      font-size:11px; font-weight:700; color:#888;
+      padding:8px 12px; background:#f0d9c2;
+      font-size:11px; font-weight:700; color:#6b5a4e;
       border-bottom:1px solid rgba(0,0,0,0.06);
     }
     .cb-row {
@@ -410,16 +420,16 @@
       align-items:center; transition: background 0.1s;
     }
     .cb-row:last-child { border-bottom:none; }
-    .cb-row:hover { background:#f9fafb; }
+    .cb-row:hover { background:#f0d9c2; }
     .cb-num { text-align:center; font-weight:700; }
     .cb-pill {
       display:inline-flex; align-items:center; justify-content:center;
       width:28px; height:20px; border-radius:10px;
       font-size:11px; font-weight:700; margin:auto;
     }
-    .cb-pill.g { background:#c0dd97; color:#27500a; }
-    .cb-pill.o { background:#FAC775; color:#633806; }
-    .cb-pill.r { background:#f7c1c1; color:#791f1f; }
+    .cb-pill.g { background:rgba(50,127,90,0.18);  color:#327F5A; }
+    .cb-pill.o { background:rgba(232,144,66,0.18); color:#E89042; }
+    .cb-pill.r { background:rgba(171,61,65,0.15);  color:#AB3D41; }
     .cb-pill.z { background:rgba(0,0,0,0.06); color:#888; }
 
     @media (max-width: 1000px) {
@@ -448,7 +458,7 @@
           <div style="display:flex;align-items:baseline;gap:10px;">
             <div class="org-title">Drylands Learning & Capacity Building Initiative (DLCI)</div>
           </div>
-          <div class="org-subtitle">Community Land Dashboard</div>
+          <div class="org-subtitle">Trust Land Dashboard · Kenya</div>
 
           <div class="header-controls" aria-hidden="false">
             <button class="btn btn-communities" id="btn-communities" title="Communities">🌍 Communities</button>
@@ -456,7 +466,7 @@
           </div>
 
           <div style="margin-top:6px;">
-            <div style="font-size:13px;font-weight:700;color:#111;margin-bottom:6px;">Legend — click to filter map</div>
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;">Trust Land Status — click to filter</div>
 
             <!-- Clickable legend filter buttons -->
             <div class="legend" role="group" aria-label="Filter pins by status">
@@ -466,12 +476,18 @@
               <button class="legend-btn btn-green" data-filter="green" title="Show registered only">
                 <span class="dot green"></span> Registered
               </button>
-              <button class="legend-btn btn-orange" data-filter="orange" title="Show adjudicated only">
-                <span class="dot orange"></span> Adjudicated
+              <button class="legend-btn btn-orange" data-filter="orange" title="Show in process only">
+                <span class="dot orange"></span> In Process
               </button>
-              <button class="legend-btn btn-red" data-filter="red" title="Show un-adjudicated only">
-                <span class="dot red"></span> Un-adjudicated
+              <button class="legend-btn btn-red" data-filter="red" title="Show identified only">
+                <span class="dot red"></span> Identified
               </button>
+            </div>
+
+            <div class="legend-desc">
+              🟢 Fully registered under the Community Land Act 2016<br>
+              🟠 Registration process underway but not yet complete<br>
+              🔴 Identified but no formal process has begun
             </div>
           </div>
         </div>
@@ -722,37 +738,37 @@
         const marker = L.marker(coords, { icon: iconFor(color) }).addTo(map);
 
         const data = communityData[name] || {};
-        const statusText = color === 'green' ? '✅ Registered' : color === 'orange' ? '🟠 Adjudicated (not complete)' : '🔴 Un-adjudicated';
-        const statusColor = color === 'green' ? '#2e7d32' : color === 'orange' ? '#ef6c00' : '#c62828';
-        const statusBg = color === 'green' ? '#e8f5e9' : color === 'orange' ? '#fff3e0' : '#ffebee';
+        const statusText = color === 'green' ? '✅ Registered' : color === 'orange' ? '🟠 In Process' : '🔴 Identified';
+        const statusColor = color === 'green' ? '#327F5A' : color === 'orange' ? '#E89042' : '#AB3D41';
+        const statusBg = color === 'green' ? 'rgba(50,127,90,0.1)' : color === 'orange' ? 'rgba(232,144,66,0.1)' : 'rgba(171,61,65,0.1)';
         const profileUrl = communityPageUrl(name);
 
         const popupHtml = `
           <div style="width:300px;font-family:'Segoe UI',sans-serif;">
-            <div style="background:#111;padding:14px 16px;margin:-1px -1px 0 -1px;border-radius:4px 4px 0 0;">
-              <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#e4d12b;margin-bottom:4px;">${countyForCommunity(name)} County</div>
+            <div style="background:#327F5A;padding:14px 16px;margin:-1px -1px 0 -1px;border-radius:4px 4px 0 0;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#EED154;margin-bottom:4px;">${countyForCommunity(name)} County</div>
               <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.1;">${name}</div>
             </div>
-            <div style="padding:12px 16px;background:#fff;border:1px solid #eee;border-top:none;">
+            <div style="padding:12px 16px;background:#fff8f2;border:1px solid rgba(0,0,0,0.08);border-top:none;">
               <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:12px;background:${statusBg};margin-bottom:10px;">
                 <span style="width:8px;height:8px;border-radius:50%;background:${statusColor};display:inline-block;"></span>
                 <span style="font-size:12px;font-weight:700;color:${statusColor};">${statusText}</span>
               </div>
               <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px;">
-                <tr style="border-bottom:1px solid #f5f5f5;">
-                  <td style="font-weight:700;padding:5px 0;color:#666;width:42%;">Area</td>
-                  <td style="padding:5px 0;color:#111;">${data.size ?? '—'}</td>
+                <tr style="border-bottom:1px solid #f0d9c2;">
+                  <td style="font-weight:700;padding:5px 0;color:#6b5a4e;width:42%;">Area</td>
+                  <td style="padding:5px 0;color:#1a1a1a;">${data.size ?? '—'}</td>
                 </tr>
-                <tr style="border-bottom:1px solid #f5f5f5;">
-                  <td style="font-weight:700;padding:5px 0;color:#666;">Population</td>
-                  <td style="padding:5px 0;color:#111;">${data.population ? data.population.toLocaleString() : '—'}</td>
+                <tr style="border-bottom:1px solid #f0d9c2;">
+                  <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Population</td>
+                  <td style="padding:5px 0;color:#1a1a1a;">${data.population ? data.population.toLocaleString() : '—'}</td>
                 </tr>
                 <tr>
-                  <td style="font-weight:700;padding:5px 0;color:#666;">Members</td>
-                  <td style="padding:5px 0;color:#111;">${data.registeredMembers ? data.registeredMembers.toLocaleString() : '—'}</td>
+                  <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Members</td>
+                  <td style="padding:5px 0;color:#1a1a1a;">${data.registeredMembers ? data.registeredMembers.toLocaleString() : '—'}</td>
                 </tr>
               </table>
-              ${profileUrl ? `<a href="${profileUrl}" target="_blank" style="display:block;text-align:center;padding:9px 16px;background:#111;color:#e4d12b;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'">View full profile →</a>` : '<div style="font-size:12px;color:#aaa;text-align:center;padding:4px 0;">Profile page coming soon</div>'}
+              ${profileUrl ? `<a href="${profileUrl}" target="_blank" style="display:block;text-align:center;padding:9px 16px;background:#E89042;color:#fff;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none;" onmouseover="this.style.background='#d4792e'" onmouseout="this.style.background='#E89042'">View full profile →</a>` : '<div style="font-size:12px;color:#aaa;text-align:center;padding:4px 0;">Profile page coming soon</div>'}
             </div>
           </div>
         `;
@@ -779,9 +795,9 @@
     const filterBadgeText = document.getElementById('filter-badge-text');
 
     const badgeColors = {
-      green:  { bg: '#2e7d32', label: 'Registered only' },
-      orange: { bg: '#ef6c00', label: 'Adjudicated only' },
-      red:    { bg: '#c62828', label: 'Un-adjudicated only' },
+      green:  { bg: '#327F5A', label: 'Registered only' },
+      orange: { bg: '#E89042', label: 'In Process only' },
+      red:    { bg: '#AB3D41', label: 'Identified only' },
       all:    { bg: 'transparent', label: '' }
     };
 
@@ -887,63 +903,6 @@
     createCountyAccordion();
 
     /*************************************************************************
-     * DETAILS PANEL
-     *************************************************************************/
-    const detailsWrapper = document.getElementById('details-wrapper');
-
-    function showDetails(name) {
-      const data = communityData[name] || {};
-      const color = pinColorsByName[name] || 'red';
-      const statusText = color === 'green' ? '✅ Registered' : color === 'orange' ? '🟠 Adjudicated (not complete)' : '🔴 Un-adjudicated';
-
-      const marker = markers[name];
-      if (marker) {
-        const latlng = marker.getLatLng();
-        map.setView(latlng, 10, { animate: true });
-        // Only open popup if the marker is currently visible
-        if (map.hasLayer(marker)) marker.openPopup();
-      }
-
-      detailsWrapper.innerHTML = '';
-
-      const mainCard = document.createElement('div');
-      mainCard.className = 'detail-card';
-      mainCard.style.flex = '1 1 320px';
-      mainCard.innerHTML = `
-        <div style="font-weight:800;margin-bottom:6px">${name}</div>
-        <div style="font-size:13px">
-          <div><strong>Size:</strong> ${data.size ?? '—'}</div>
-          <div><strong>Population:</strong> ${data.population ?? '—'}</div>
-          <div><strong>Registered members:</strong> ${data.registeredMembers ?? '—'}</div>
-          <div><strong>Status:</strong> ${statusText}</div>
-        </div>
-      `;
-      detailsWrapper.appendChild(mainCard);
-
-      if (communityCoordinates[name]) {
-        const coordCard = document.createElement('div');
-        coordCard.className = 'detail-card';
-        coordCard.innerHTML = `
-          <div style="font-weight:700;margin-bottom:6px">Coordinates</div>
-          <div style="font-size:13px">${communityCoordinates[name][0].toFixed(6)}°, ${communityCoordinates[name][1].toFixed(6)}°</div>
-          <div style="margin-top:8px;font-size:12px;color:#555">Click marker for popup with quick info</div>
-        `;
-        detailsWrapper.appendChild(coordCard);
-      }
-
-      const actionsCard = document.createElement('div');
-      actionsCard.className = 'detail-card';
-      actionsCard.innerHTML = `
-        <div style="font-weight:700;margin-bottom:6px">Actions</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <a href="#" onclick="alert('Open community page — placeholder'); return false;">Open community page</a>
-          <a href="#" onclick="alert('Download community dossier — placeholder'); return false;">Download dossier</a>
-        </div>
-      `;
-      detailsWrapper.appendChild(actionsCard);
-    }
-
-    /*************************************************************************
      * FOCUS / SEARCH
      *************************************************************************/
     function focusOnCommunity(name) {
@@ -956,14 +915,13 @@
       const mapEl = document.getElementById('leaflet-map');
       mapEl.scrollIntoView({ behavior:'smooth', block:'center' });
 
-      // If the marker is hidden by filter, temporarily reveal it with a note
       const color = pinColorsByName[name] || 'red';
       if (activeFilter !== 'all' && color !== activeFilter) {
-        // Reset filter to show the selected community
         applyFilter('all');
       }
 
-      showDetails(name);
+      const m = markers[name];
+      if (m) { map.setView(m.getLatLng(), 10, { animate: true }); m.openPopup(); }
     }
 
     function expandCountyForCommunity(name) {
@@ -1064,21 +1022,21 @@
           <div class="stat-sub">${Object.keys(counties).length} counties</div>
         </div>
         <div class="stat-card s-green">
-          <div class="stat-num" style="color:#3B6D11">${green}</div>
-          <div class="stat-label" style="color:#3B6D11">Registered</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(green/total*100)}%;background:#639922"></div></div>
+          <div class="stat-num" style="color:#327F5A">${green}</div>
+          <div class="stat-label" style="color:#327F5A">Registered</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(green/total*100)}%;background:#327F5A"></div></div>
           <div class="stat-sub">${Math.round(green/total*100)}% of total</div>
         </div>
         <div class="stat-card s-orange">
-          <div class="stat-num" style="color:#854F0B">${orange}</div>
-          <div class="stat-label" style="color:#854F0B">Adjudicated</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(orange/total*100)}%;background:#EF9F27"></div></div>
+          <div class="stat-num" style="color:#E89042">${orange}</div>
+          <div class="stat-label" style="color:#E89042">In Process</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(orange/total*100)}%;background:#E89042"></div></div>
           <div class="stat-sub">${Math.round(orange/total*100)}% of total</div>
         </div>
         <div class="stat-card s-red">
-          <div class="stat-num" style="color:#A32D2D">${red}</div>
-          <div class="stat-label" style="color:#A32D2D">Un-adjudicated</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(red/total*100)}%;background:#e24b4a"></div></div>
+          <div class="stat-num" style="color:#AB3D41">${red}</div>
+          <div class="stat-label" style="color:#AB3D41">Identified</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(red/total*100)}%;background:#AB3D41"></div></div>
           <div class="stat-sub">${Math.round(red/total*100)}% of total</div>
         </div>
       `;
@@ -1098,15 +1056,13 @@
         <div class="cb-header">
           <span>County</span>
           <span style="text-align:center">Total</span>
-          <span style="text-align:center;color:#3B6D11">Reg.</span>
-          <span style="text-align:center;color:#854F0B">Adj.</span>
-          <span style="text-align:center;color:#A32D2D">Un-adj.</span>
+          <span style="text-align:center;color:#327F5A">Reg.</span>
+          <span style="text-align:center;color:#E89042">In Proc.</span>
+          <span style="text-align:center;color:#AB3D41">Identified</span>
         </div>
         ${rows}
       `;
     })();
-
-
 
   </script>
 </body>
