@@ -167,9 +167,9 @@
   <div class="hero">
     <div class="hero-county">Turkana County</div>
     <h1 class="hero-name">Nakukulas</h1>
-    <div class="hero-status red">
+    <div class="hero-status green">
       <span class="status-dot"></span>
-      🔴 Un-adjudicated
+      ✅ Registered
     </div>
   </div>
 
@@ -188,22 +188,22 @@
         <div class="facts-grid">
           <div class="fact">
             <div class="fact-label">Total area</div>
-            <div class="fact-value pending">—</div>
+            <div class="fact-value ">42,070 ha</div>
           </div>
           <div class="fact">
             <div class="fact-label">Estimated population</div>
-            <div class="fact-value pending">—</div>
+            <div class="fact-value ">6,000</div>
           </div>
           <div class="fact">
             <div class="fact-label">Registered members</div>
-            <div class="fact-value pending">—</div>
+            <div class="fact-value ">4,000</div>
           </div>
           <div class="fact">
             <div class="fact-label">County</div>
             <div class="fact-value">Turkana</div>
           </div>
         </div>
-        
+        <p class="description">Nakukulas community achieved full registration on 1 May 2025 with title issued — a landmark milestone for the Turkana community and a significant step in securing pastoralists land rights in the region</p>
       </div>
 
       <!-- Timeline -->
@@ -223,25 +223,25 @@
             </div>
           </div>
           <div class="tl-item">
-            <div class="tl-dot active">⏳</div>
+            <div class="tl-dot done">📋</div>
             <div class="tl-content">
-              <div class="tl-date">Pending</div>
+              <div class="tl-date">January 2017</div>
               <div class="tl-label">Adjudication process started</div>
               <div class="tl-note">Filing with County Land Management Board</div>
             </div>
           </div>
           <div class="tl-item">
-            <div class="tl-dot future">⏳</div>
+            <div class="tl-dot done">✓</div>
             <div class="tl-content">
-              <div class="tl-date">Not yet started</div>
+              <div class="tl-date">Complete</div>
               <div class="tl-label">Adjudication completed</div>
               <div class="tl-note">All boundaries agreed and gazetted</div>
             </div>
           </div>
           <div class="tl-item">
-            <div class="tl-dot future">⏳</div>
+            <div class="tl-dot done">📜</div>
             <div class="tl-content">
-              <div class="tl-date">Pending</div>
+              <div class="tl-date">May 2025</div>
               <div class="tl-label">Community Land Register certificate issued</div>
               <div class="tl-note">Final registration under CLA 2016</div>
             </div>
@@ -278,7 +278,7 @@
               <div class="doc-name">Community Land Register certificate</div>
               <div class="doc-meta">Issued by National Land Commission</div>
             </div>
-            <span class="doc-badge pending">Pending upload</span>
+            <span class="doc-badge ">Available</span>
           </div>
           <div class="doc-item" onclick="alert('Upload feature coming soon')">
             <div class="doc-icon">👥</div>
@@ -357,10 +357,10 @@
         <div class="progress-wrap">
           <div class="progress-label">
             <span>Current stage</span>
-            <span>15%</span>
+            <span>100%</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" id="progress-fill" style="width:0%;background:#c62828"></div>
+            <div class="progress-fill" id="progress-fill" style="width:0%;background:#2e7d32"></div>
           </div>
           <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;">
             <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
@@ -392,7 +392,7 @@
     // Mini-map
     const lat = 1.9048;
     const lng = 35.9253;
-    const status = 'red';
+    const status = 'green';
     const colors = { green: '#2e7d32', orange: '#ef6c00', red: '#c62828' };
 
     if (lat && lng) {
@@ -414,7 +414,7 @@
 
     // Animate progress bar on load
     setTimeout(() => {
-      document.getElementById('progress-fill').style.width = '15%';
+      document.getElementById('progress-fill').style.width = '100%';
     }, 300);
   </script>
 </body>
