@@ -456,13 +456,13 @@
 
         <div class="header-info">
           <div style="display:flex;align-items:baseline;gap:10px;">
-            <div class="org-title">Drylands Learning & Capacity Building Initiative (DLCI)</div>
+            <div class="org-title">Drylands Learning & Capacity Building Initiative </div>
           </div>
           <div class="org-subtitle">Trust Land Dashboard · Kenya</div>
 
           <div class="header-controls" aria-hidden="false">
-            <button class="btn btn-communities" id="btn-communities" title="Communities">🌍 Communities</button>
             <button class="btn btn-resources" id="btn-resources" title="Resources">📑 Resources</button>
+            <button class="btn btn-communities" id="btn-factsheet" title="Community Land at 10">📋 Community Land at 10</button>
           </div>
 
           <div style="margin-top:6px;">
@@ -979,8 +979,8 @@
     document.getElementById('btn-resources').addEventListener('click', () => {
       window.location.href = 'resources.html';
     });
-    document.getElementById('btn-communities').addEventListener('click', () => {
-      document.getElementById('sidebar-body').scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('btn-factsheet').addEventListener('click', () => {
+      window.open('FactSheet.html', '_blank');
     });
 
     (function fitToAllMarkers() {
