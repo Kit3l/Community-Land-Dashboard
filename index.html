@@ -192,7 +192,7 @@
 
     .stat-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; }
 
-    /* ── STATUS CARDS ────────────────────────────────────────── */
+    /* ── DATA NOTE ───────────────────────────────────────────── */
     .status-section {
       max-width: 1280px; margin: 0 auto;
       padding: 80px 48px;
@@ -214,67 +214,108 @@
       margin-bottom: 40px; letter-spacing: 0.5px;
     }
 
-    .status-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-
-    @media (max-width: 900px) { .status-cards { grid-template-columns: 1fr; } .stats-strip { grid-template-columns: repeat(2,1fr); gap: 32px; } .stat { border-right: none; padding: 0; } }
-
-    .s-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 30px;
-      border: 1px solid var(--border);
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .s-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 4px;
-    }
-    .s-card.s-green::before  { background: var(--green); }
-    .s-card.s-orange::before { background: var(--orange); }
-    .s-card.s-red::before    { background: var(--red); }
-
-    .s-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,26,0.10); }
-
-    .s-card-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      margin-bottom: 16px;
-    }
-    .s-green  .s-card-dot { background: var(--green);  box-shadow: 0 0 10px rgba(50,127,90,0.4); }
-    .s-orange .s-card-dot { background: var(--orange); box-shadow: 0 0 10px rgba(232,144,66,0.4); }
-    .s-red    .s-card-dot { background: var(--red);    box-shadow: 0 0 10px rgba(171,61,65,0.4); }
-
-    .s-card-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px; letter-spacing: 0.5px;
-      margin-bottom: 10px; color: var(--ink);
-    }
-
-    .s-green  .s-card-title { color: var(--green); }
-    .s-orange .s-card-title { color: var(--orange); }
-    .s-red    .s-card-title { color: var(--red); }
-
-    .s-card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
-
-    .s-card-count { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .s-card-count-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
-    .s-card-count-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 1; margin-top: 2px; }
-    .s-green  .s-card-count-num { color: var(--green); }
-    .s-orange .s-card-count-num { color: var(--orange); }
-    .s-red    .s-card-count-num { color: var(--red); }
+    @media (max-width: 900px) { .stats-strip { grid-template-columns: repeat(2,1fr); gap: 32px; } .stat { border-right: none; padding: 0; } }
 
     .data-note {
-      display: flex; align-items: flex-start; gap: 10px;
-      margin-top: 28px;
-      padding: 16px 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 12.5px; font-weight: 300; line-height: 1.6;
+      display: flex; align-items: flex-start; gap: 18px;
+      padding: 32px 36px;
+      background: #fff;
+      border-left: 5px solid var(--orange);
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(26,26,26,0.08);
+      font-size: 16px; font-weight: 300; line-height: 1.75;
       color: var(--muted);
     }
     .data-note strong { color: var(--ink); font-weight: 700; }
+    .data-note-icon { font-size: 22px; color: var(--orange); line-height: 1.3; }
+
+    /* ── COUNTY BREAKDOWN ────────────────────────────────────── */
+    .county-section {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .county-intro {
+      font-size: 14.5px; font-weight: 300; line-height: 1.7;
+      color: var(--muted); max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    .county-accordion { display: flex; flex-direction: column; gap: 12px; }
+
+    .county-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .county-summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px;
+      user-select: none;
+    }
+    .county-summary::-webkit-details-marker { display: none; }
+
+    .county-summary::after {
+      content: '+';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--orange);
+      margin-left: 16px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .county-item[open] .county-summary::after { content: '−'; }
+
+    .county-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px; letter-spacing: 0.4px;
+      color: var(--green);
+    }
+
+    .county-count {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+      background: var(--bg-card);
+      padding: 5px 12px; border-radius: 20px;
+      margin-right: auto; margin-left: 16px;
+      white-space: nowrap;
+    }
+
+    .county-body {
+      padding: 0 24px 24px;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    .county-group-label {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.3px; color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .county-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .county-tag {
+      font-size: 12.5px; font-weight: 500; color: var(--ink);
+      background: var(--orange-light);
+      border: 1px solid rgba(232,144,66,0.25);
+      padding: 6px 12px; border-radius: 20px;
+      line-height: 1.4;
+    }
+
+    .county-footnote {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .county-section { padding: 0 20px 60px; }
+      .county-summary { padding: 16px 18px; flex-wrap: wrap; gap: 6px; }
+      .county-count { margin-left: 0; }
+      .county-body { padding: 0 18px 18px; }
+    }
 
     /* ── FOOTER ──────────────────────────────────────────────── */
     footer {
@@ -318,7 +359,7 @@
   <div class="hero-wrap">
     <div>
       <div class="hero-eyebrow">Trust Land Dashboard · Kenya</div>
-      <h1>Securing<br><em>Community</em><br>Land Rights</h1>
+      <h1>Securing<br><em>Community</em>Land Rights</h1>
       <p class="hero-body">
         A live geographic platform tracking the land registration journey of
         91 pastoral and dryland communities across 13 counties in Kenya —
@@ -341,47 +382,300 @@
   <div class="stats-strip">
     <div class="stat"><div class="stat-num">91</div><div class="stat-label">Communities tracked</div></div>
     <div class="stat"><div class="stat-num">13</div><div class="stat-label">Counties covered</div></div>
-    <div class="stat"><div class="stat-num">58</div><div class="stat-label">Fully registered</div></div>
-    <div class="stat"><div class="stat-num">2016</div><div class="stat-label">Community Land Act</div></div>
+    <div class="stat"><div class="stat-num">64</div><div class="stat-label">Fully registered (Min. of Lands)</div></div>
+    <div class="stat"><div class="stat-num">58</div><div class="stat-label">With confirmed location</div></div>
   </div>
 
-  <!-- STATUS CARDS -->
+  <!-- DATA NOTE -->
   <section class="status-section" id="status">
-    <div class="section-eyebrow">Registration status</div>
-    <div class="section-heading">Where Communities Stand</div>
-    <div class="status-cards">
-      <div class="s-card s-green">
-        <div class="s-card-dot"></div>
-        <div class="s-card-title">Fully Registered</div>
-        <div class="s-card-desc">Community land certificate issued under the Community Land Act 2016. Land rights are fully secured and legally recognised.</div>
-        <div class="s-card-count">
-          <div class="s-card-count-label">Communities registered</div>
-          <div class="s-card-count-num">58</div>
-        </div>
-      </div>
-      <div class="s-card s-orange">
-        <div class="s-card-dot"></div>
-        <div class="s-card-title">In Process</div>
-        <div class="s-card-desc">The community is in the process of registration — adjudication is underway or complete, but the final certificate has not yet been issued.</div>
-        <div class="s-card-count">
-          <div class="s-card-count-label">Communities in process</div>
-          <div class="s-card-count-num">28</div>
-        </div>
-      </div>
-      <div class="s-card s-red">
-        <div class="s-card-dot"></div>
-        <div class="s-card-title">Inventoried</div>
-        <div class="s-card-desc">Inventory submitted, but no formal registration process has begun yet.</div>
-        <div class="s-card-count">
-          <div class="s-card-count-label">Communities inventoried</div>
-          <div class="s-card-count-num">5</div>
-        </div>
-      </div>
-    </div>
-
     <div class="data-note">
-      <span aria-hidden="true">ⓘ</span>
-      <span><strong>A note on data:</strong> Figures on this page reflect information collected from DLCI, county land offices, and partner organisations at the time of publishing. Coverage varies by community — some records (boundaries, population, registration dates) are still pending confirmation and will be updated as more accurate information becomes available.</span>
+      <span aria-hidden="true" class="data-note-icon">ⓘ</span>
+      <span><strong>A note on data:</strong> There are an estimated 915 community lands across Kenya. The 91 on this dashboard are the ones DLCI currently holds information on. Of these 91, 64 have been fully titled under the Community Land Act 2016, as confirmed by the Ministry of Lands — but we currently hold confirmed location and detailed profile information for only 58 of them; the rest are pending fuller documentation. Coverage varies by community — some records (boundaries, population, registration dates) are still pending confirmation and will be updated as more accurate information becomes available.</span>
+    </div>
+  </section>
+
+  <!-- COUNTY BREAKDOWN -->
+  <section class="county-section" id="counties">
+    <div class="section-eyebrow">Where communities stand</div>
+    <div class="section-heading">By County</div>
+    <p class="county-intro">
+      The 91 communities DLCI has documented, broken down by county — click one to see the individual communities.
+      Each is at a different stage: some have secured a full title, some are still in the process of registration,
+      and others have only had an inventory submitted with no formal process yet started. Most trace back to former
+      group ranches that converted their land tenure; a smaller number are historical, un-adjudicated former trust lands.
+    </p>
+
+    <div class="county-accordion">
+<details class="county-item" open>
+          <summary class="county-summary">
+            <span class="county-name">Samburu County</span>
+            <span class="county-count">34 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Group Ranches</div>
+              <div class="county-tags">
+              <span class="county-tag">Lodokejek</span>
+              <span class="county-tag">Ndonyo Wasin</span>
+              <span class="county-tag">Nkaroni</span>
+              <span class="county-tag">Raraiti</span>
+              <span class="county-tag">Lenguruma</span>
+              <span class="county-tag">Lbarta</span>
+              <span class="county-tag">South Horr</span>
+              <span class="county-tag">Morijo</span>
+              <span class="county-tag">Loosuk</span>
+              <span class="county-tag">Angata Nanyekie</span>
+              <span class="county-tag">Pura</span>
+              <span class="county-tag">Kirimon</span>
+              <span class="county-tag">Amaiya</span>
+              <span class="county-tag">Lpartuk</span>
+              <span class="county-tag">Logorate</span>
+              <span class="county-tag">Barsaloi</span>
+              <span class="county-tag">Marti</span>
+              <span class="county-tag">Nonkeek</span>
+              <span class="county-tag">Nachola</span>
+              <span class="county-tag">Sarara</span>
+              <span class="county-tag">Sapache</span>
+              <span class="county-tag">Sereolupi</span>
+              <span class="county-tag">Losesia</span>
+              </div>
+            </div>
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands (Un-adjudicated)</div>
+              <div class="county-tags">
+              <span class="county-tag">Arisim</span>
+              <span class="county-tag">Nairimirimo</span>
+              </div>
+            </div>
+            <div class="county-group">
+              <div class="county-group-label">In Process (Land Category Pending)</div>
+              <div class="county-tags">
+              <span class="county-tag">Ngutuk Ongiron</span>
+              <span class="county-tag">Girgir</span>
+              <span class="county-tag">Lpus</span>
+              <span class="county-tag">Sesia</span>
+              <span class="county-tag">Ltirimin</span>
+              <span class="county-tag">Ngilai Central</span>
+              <span class="county-tag">Ngilai West</span>
+              <span class="county-tag">Tinga B</span>
+              <span class="county-tag">Ngilai</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Laikipia County</span>
+            <span class="county-count">13 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Group Ranches (Laikipia North)</div>
+              <div class="county-tags">
+              <span class="county-tag">Kijabe</span>
+              <span class="county-tag">Munishoi</span>
+              <span class="county-tag">Ilmotiok</span>
+              <span class="county-tag">Tiamamut</span>
+              <span class="county-tag">Koija</span>
+              <span class="county-tag">Inkiloriti</span>
+              <span class="county-tag">Kurikuri</span>
+              <span class="county-tag">Murupusi</span>
+              <span class="county-tag">Lekurruki</span>
+              <span class="county-tag">Ilngwesi I</span>
+              <span class="county-tag">Ilngwesi II (Mayianat)</span>
+              <span class="county-tag">Ilpolei</span>
+              <span class="county-tag">Musul</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">West Pokot County</span>
+            <span class="county-count">13 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands (Un-adjudicated)</div>
+              <div class="county-tags">
+              <span class="county-tag">Lokitonyala</span>
+              <span class="county-tag">Kasei</span>
+              <span class="county-tag">Alale</span>
+              <span class="county-tag">Chesra</span>
+              <span class="county-tag">Chemwochoi B</span>
+              <span class="county-tag">Ortum West</span>
+              <span class="county-tag">Nakwijit</span>
+              <span class="county-tag">Sobukwo</span>
+              <span class="county-tag">Kiwawa</span>
+              <span class="county-tag">Kases</span>
+              <span class="county-tag">Chelopoy</span>
+              <span class="county-tag">Mbaru</span>
+              <span class="county-tag">Kalapata</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Turkana County</span>
+            <span class="county-count">10 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands</div>
+              <div class="county-tags">
+              <span class="county-tag">Lorengippi</span>
+              <span class="county-tag">Turkana West</span>
+              <span class="county-tag">Lokichar</span>
+              <span class="county-tag">Kapese</span>
+              <span class="county-tag">Nakukulas</span>
+              <span class="county-tag">Lokwii</span>
+              <span class="county-tag">Kangitit</span>
+              <span class="county-tag">Lokapel</span>
+              <span class="county-tag">Lokiriama</span>
+              <span class="county-tag">Nakurio</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Taita Taveta County</span>
+            <span class="county-count">5 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Group Ranches</div>
+              <div class="county-tags">
+              <span class="county-tag">Teri 'B'</span>
+              <span class="county-tag">Mbulia</span>
+              <span class="county-tag">Ndara 'B'</span>
+              <span class="county-tag">Ishangaiwishi</span>
+              <span class="county-tag">Oza</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Wajir County</span>
+            <span class="county-count">3 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands</div>
+              <div class="county-tags">
+              <span class="county-tag">Leheley</span>
+              <span class="county-tag">Diff</span>
+              <span class="county-tag">Sabuli</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Marsabit County</span>
+            <span class="county-count">3 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands</div>
+              <div class="county-tags">
+              <span class="county-tag">Obbu</span>
+              <span class="county-tag">Obittu</span>
+              <span class="county-tag">Walda</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Isiolo County</span>
+            <span class="county-count">3 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands</div>
+              <div class="county-tags">
+              <span class="county-tag">Charri</span>
+              <span class="county-tag">Cherab</span>
+              <span class="county-tag">Kinna - Kulamawe - Gotu Dedha</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Baringo County</span>
+            <span class="county-count">2 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Lands (Un-adjudicated)</div>
+              <div class="county-tags">
+              <span class="county-tag">Paka (Tiaty)</span>
+              <span class="county-tag">Kokwa Island</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Kajiado County</span>
+            <span class="county-count">2 Communities</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Group Ranches</div>
+              <div class="county-tags">
+              <span class="county-tag">Shompole</span>
+              <span class="county-tag">Olkeri</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Garissa County</span>
+            <span class="county-count">1 Community</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Land (Un-adjudicated)</div>
+              <div class="county-tags">
+              <span class="county-tag">Kamuthe — the first former trust land to obtain a community land title</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Tana River County</span>
+            <span class="county-count">1 Community</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Land (Un-adjudicated)</div>
+              <div class="county-tags">
+              <span class="county-tag">Wayu Daba Gale Dertu</span>
+              </div>
+            </div>
+          </div>
+        </details>
+<details class="county-item">
+          <summary class="county-summary">
+            <span class="county-name">Lamu County</span>
+            <span class="county-count">1 Community</span>
+          </summary>
+          <div class="county-body">
+            <div class="county-group">
+              <div class="county-group-label">Former Trust Land</div>
+              <div class="county-tags">
+              <span class="county-tag">Ancestral lands of the indigenous Boni Community</span>
+              </div>
+            </div>
+          </div>
+        </details>
     </div>
   </section>
 
