@@ -195,12 +195,14 @@
       font-size: 12px;
       font-weight: 700;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      pointer-events: none;
-      transition: opacity 0.2s;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
       display: flex;
       align-items: center;
       gap: 7px;
     }
+    .filter-badge:hover { transform: translateY(-1px); }
+    .filter-badge.hidden { pointer-events: none; }
 
     .filter-badge.hidden { opacity: 0; }
 
@@ -268,6 +270,13 @@
       font-weight:700;
       color:#1a1a1a;
       cursor:pointer;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+
+    .county > button.active-filter {
+      background: rgba(50,127,90,0.16);
+      box-shadow: inset 3px 0 0 0 #327F5A;
+      color: #235c40;
     }
 
     .communities-list {
@@ -473,21 +482,21 @@
               <button class="legend-btn btn-all active" data-filter="all" title="Show all pins">
                 <span class="dot"></span> All
               </button>
-              <button class="legend-btn btn-green" data-filter="green" title="Show registered only">
-                <span class="dot green"></span> Registered
+              <button class="legend-btn btn-green" data-filter="green" title="Show fully registered only">
+                <span class="dot green"></span> Fully Registered
               </button>
               <button class="legend-btn btn-orange" data-filter="orange" title="Show in process only">
                 <span class="dot orange"></span> In Process
               </button>
-              <button class="legend-btn btn-red" data-filter="red" title="Show identified only">
-                <span class="dot red"></span> Identified
+              <button class="legend-btn btn-red" data-filter="red" title="Show inventoried only">
+                <span class="dot red"></span> Inventoried
               </button>
             </div>
 
             <div class="legend-desc">
               🟢 Fully registered under the Community Land Act 2016<br>
-              🟠 Registration process underway but not yet complete<br>
-              🔴 Identified but no formal process has begun
+              🟠 The community is in the process of registration<br>
+              🔴 Inventory submitted, but no formal process has begun
             </div>
           </div>
         </div>
@@ -510,9 +519,10 @@
       <section class="map-area" aria-label="Map area">
         <div id="leaflet-map"></div>
         <!-- Live filter badge overlaid on map -->
-        <div class="filter-badge hidden" id="filter-badge">
+        <div class="filter-badge hidden" id="filter-badge" title="Click to clear filters">
           <span id="filter-badge-dot" style="width:10px;height:10px;border-radius:50%;display:inline-block;"></span>
           <span id="filter-badge-text"></span>
+          <span style="opacity:0.6;font-weight:400;">✕</span>
         </div>
       </section>
 
@@ -558,6 +568,9 @@
 
     const communityCoordinates = {
       "Lorengippi": [2.5705, 34.9889],
+      "Lokiriama": [2.757792, 34.877594],
+      "Nakurio": [2.653925, 35.016592],
+      "Kalapata": [2.389772, 35.016461],
       "Turkana West": [3.7168, 34.9589],
       "Lokichar": [2.3810, 35.6250],
       "Leheley": [1.62759, 40.00681],
@@ -569,6 +582,7 @@
       "Lokitonyala": [2.36122, 34.95148],
       "Kasei": [1.97343, 35.20563],
       "Alale": [2.3439, 34.9274],
+      "Mbaru": [2.132783, 35.192714],
       "Charri": [0.95833, 38.53315],
       "Cherab": [1.06729, 38.66619],
       "Kinna - Kulamawe - Gotu Dedha": [0.318539, 38.193773],
@@ -607,14 +621,18 @@
     };
 
     const pinColorsByName = {
-      "Lorengippi": "red",
+      "Lorengippi": "orange",
+      "Lokiriama": "orange",
+      "Nakurio": "orange",
+      "Kalapata": "orange",
       "Turkana West": "red",
-      "Lokichar": "red",
-      "Kapese": "red",
+      "Lokichar": "green",
+      "Kapese": "green",
       "Nakukulas": "green",
       "Lokwii": "red",
       "Kangitit": "red",
       "Lokapel": "red",
+      "Mbaru": "green",
       "Leheley": "orange",
       "Diff": "orange",
       "Sabuli": "orange",
@@ -623,7 +641,7 @@
       "Walda": "orange",
       "Lokitonyala": "orange",
       "Kasei": "red",
-      "Alale": "orange",
+      "Alale": "green",
       "Charri": "orange",
       "Cherab": "orange",
       "Kinna - Kulamawe - Gotu Dedha": "orange",
@@ -635,9 +653,9 @@
       "Ortum West": "orange",
       "Nakwijit": "orange",
       "Sobukwo": "orange",
-      "Kiwawa": "red",
-      "Kases": "red",
-      "Chelopoy": "red",
+      "Kiwawa": "green",
+      "Kases": "green",
+      "Chelopoy": "green",
       "Ngutuk Ongiron": "orange",
       "Girgir": "orange",
       "Lpus": "orange",
@@ -646,38 +664,92 @@
       "Ngilai Central": "orange",
       "Ngilai West": "orange",
       "Tinga B": "orange",
-      "Nkaroni": "orange",
+      "Nkaroni": "green",
       "Ngilai": "orange",
-      "Kijabe": "orange",
-      "Munishoi": "orange",
-      "Ilmotiok": "orange",
-      "Tiamamut": "orange",
-      "Koija": "orange",
-      "Inkiloriti": "orange",
-      "Kurikuri": "orange",
-      "Murupusi": "orange",
-      "Lekurruki": "orange",
-      "Ilngwesi I": "orange",
-      "Ilngwesi II - Mayianat": "orange",
-      "Ilpolei": "orange",
-      "Musul": "orange",
-      "Paka": "red",
-      "Kokwa Island": "red",
-      "Shompole": "red",
-      "Wayu Daba": "orange"
+      "Kijabe": "green",
+      "Munishoi": "green",
+      "Ilmotiok": "green",
+      "Tiamamut": "green",
+      "Koija": "green",
+      "Inkiloriti": "green",
+      "Kurikuri": "green",
+      "Murupusi": "green",
+      "Lekurruki": "green",
+      "Ilngwesi I": "green",
+      "Ilngwesi II - Mayianat": "green",
+      "Ilpolei": "green",
+      "Musul": "green",
+      "Paka": "green",
+      "Kokwa Island": "green",
+      "Shompole": "green",
+      "Wayu Daba": "green",
+      "Lodokejek": "green",
+      "Ndonyo Wasin": "green",
+      "Raraiti": "green",
+      "Lenguruma": "green",
+      "Lbarta": "green",
+      "South Horr": "green",
+      "Morijo": "green",
+      "Loosuk": "green",
+      "Angata Nanyekie": "green",
+      "Pura": "green",
+      "Kirimon": "green",
+      "Amaiya": "green",
+      "Lpartuk": "green",
+      "Logorate": "green",
+      "Barsaloi": "green",
+      "Marti": "green",
+      "Nonkeek": "green",
+      "Nachola": "green",
+      "Sarara": "green",
+      "Sapache": "green",
+      "Sereolupi": "green",
+      "Losesia": "green",
+      "Olkeri": "green",
+      "Teri 'B'": "green",
+      "Mbulia": "green",
+      "Ndara 'B'": "green",
+      "Ishangaiwishi": "green",
+      "Oza": "green",
+      "Boni": "green"
+    };
+
+    const landCategoryByName = {
+      "Nkaroni": "Former Group Ranch", "Arisim": "Former Trust Land", "Nairimirimo": "Former Trust Land",
+      "Kijabe": "Former Group Ranch", "Munishoi": "Former Group Ranch", "Ilmotiok": "Former Group Ranch",
+      "Tiamamut": "Former Group Ranch", "Koija": "Former Group Ranch", "Inkiloriti": "Former Group Ranch",
+      "Kurikuri": "Former Group Ranch", "Murupusi": "Former Group Ranch", "Lekurruki": "Former Group Ranch",
+      "Ilngwesi I": "Former Group Ranch", "Ilngwesi II - Mayianat": "Former Group Ranch",
+      "Ilpolei": "Former Group Ranch", "Musul": "Former Group Ranch",
+      "Paka": "Former Trust Land", "Kokwa Island": "Former Trust Land",
+      "Shompole": "Former Group Ranch", "Olkeri": "Former Group Ranch",
+      "Kamuthe": "Former Trust Land", "Wayu Daba": "Former Trust Land",
+      "Lodokejek": "Former Group Ranch", "Ndonyo Wasin": "Former Group Ranch", "Raraiti": "Former Group Ranch",
+      "Lenguruma": "Former Group Ranch", "Lbarta": "Former Group Ranch", "South Horr": "Former Group Ranch",
+      "Morijo": "Former Group Ranch", "Loosuk": "Former Group Ranch", "Angata Nanyekie": "Former Group Ranch",
+      "Pura": "Former Group Ranch", "Kirimon": "Former Group Ranch", "Amaiya": "Former Group Ranch",
+      "Lpartuk": "Former Group Ranch", "Logorate": "Former Group Ranch", "Barsaloi": "Former Group Ranch",
+      "Marti": "Former Group Ranch", "Nonkeek": "Former Group Ranch", "Nachola": "Former Group Ranch",
+      "Sarara": "Former Group Ranch", "Sapache": "Former Group Ranch", "Sereolupi": "Former Group Ranch",
+      "Losesia": "Former Group Ranch",
+      "Teri 'B'": "Former Group Ranch", "Mbulia": "Former Group Ranch", "Ndara 'B'": "Former Group Ranch",
+      "Ishangaiwishi": "Former Group Ranch", "Oza": "Former Group Ranch",
+      "Boni": "Former Trust Land"
     };
 
     const counties = {
-      "Turkana": ["Lorengippi","Turkana West","Lokichar","Kapese","Nakukulas","Lokwii","Kangitit","Lokapel"],
+      "Turkana": ["Lorengippi","Turkana West","Lokichar","Kapese","Nakukulas","Lokwii","Kangitit","Lokapel","Lokiriama","Nakurio"],
       "Wajir": ["Leheley","Diff","Sabuli"],
       "Marsabit": ["Obbu","Obittu","Walda"],
-      "West Pokot": ["Lokitonyala","Kasei","Alale","Chesra","Chemwochoi B","Ortum West","Nakwijit","Sobukwo","Kiwawa","Kases","Chelopoy"],
+      "West Pokot": ["Lokitonyala","Kasei","Alale","Chesra","Chemwochoi B","Ortum West","Nakwijit","Sobukwo","Kiwawa","Kases","Chelopoy","Mbaru","Kalapata"],
       "Isiolo": ["Charri","Cherab","Kinna - Kulamawe - Gotu Dedha"],
       "Garissa": ["Kamuthe"],
-      "Samburu": ["Nairimirimo","Arisim","Ngutuk Ongiron","Girgir","Lpus","Sesia","Ltirimin","Ngilai Central","Ngilai West","Tinga B","Nkaroni","Ngilai"],
+      "Samburu": ["Nairimirimo","Arisim","Ngutuk Ongiron","Girgir","Lpus","Sesia","Ltirimin","Ngilai Central","Ngilai West","Tinga B","Nkaroni","Ngilai","Lodokejek","Ndonyo Wasin","Raraiti","Lenguruma","Lbarta","South Horr","Morijo","Loosuk","Angata Nanyekie","Pura","Kirimon","Amaiya","Lpartuk","Logorate","Barsaloi","Marti","Nonkeek","Nachola","Sarara","Sapache","Sereolupi","Losesia"],
       "Laikipia": ["Kijabe","Munishoi","Ilmotiok","Tiamamut","Koija","Inkiloriti","Kurikuri","Murupusi","Lekurruki","Ilngwesi I","Ilngwesi II - Mayianat","Ilpolei","Musul"],
+      "Taita Taveta": ["Teri 'B'","Mbulia","Ndara 'B'","Ishangaiwishi","Oza"],
+      "Lamu": ["Boni"],
       "Baringo": ["Paka","Kokwa Island"],
-      "Kajiado": ["Shompole"],
+      "Kajiado": ["Shompole","Olkeri"],
       "Tana River": ["Wayu Daba"]
     };
 
@@ -688,7 +760,8 @@
       'Turkana': 'turkana', 'Wajir': 'wajir', 'Marsabit': 'marsabit',
       'West Pokot': 'west-pokot', 'Isiolo': 'isiolo', 'Garissa': 'garissa',
       'Samburu': 'samburu', 'Laikipia': 'laikipia', 'Baringo': 'baringo',
-      'Kajiado': 'kajiado', 'Tana River': 'tana-river'
+      'Kajiado': 'kajiado', 'Tana River': 'tana-river',
+      'Taita Taveta': 'taita-taveta', 'Lamu': 'lamu'
     };
 
     function communitySlug(name) {
@@ -738,7 +811,7 @@
         const marker = L.marker(coords, { icon: iconFor(color) }).addTo(map);
 
         const data = communityData[name] || {};
-        const statusText = color === 'green' ? '✅ Registered' : color === 'orange' ? '🟠 In Process' : '🔴 Identified';
+        const statusText = color === 'green' ? '✅ Fully Registered' : color === 'orange' ? '🟠 In Process' : '🔴 Inventoried';
         const statusColor = color === 'green' ? '#327F5A' : color === 'orange' ? '#E89042' : '#AB3D41';
         const statusBg = color === 'green' ? 'rgba(50,127,90,0.1)' : color === 'orange' ? 'rgba(232,144,66,0.1)' : 'rgba(171,61,65,0.1)';
         const profileUrl = communityPageUrl(name);
@@ -763,9 +836,13 @@
                   <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Population</td>
                   <td style="padding:5px 0;color:#1a1a1a;">${data.population ? data.population.toLocaleString() : '—'}</td>
                 </tr>
-                <tr>
+                <tr style="border-bottom:1px solid #f0d9c2;">
                   <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Members</td>
                   <td style="padding:5px 0;color:#1a1a1a;">${data.registeredMembers ? data.registeredMembers.toLocaleString() : '—'}</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Land category</td>
+                  <td style="padding:5px 0;color:#1a1a1a;">${landCategoryByName[name] || '—'}</td>
                 </tr>
               </table>
               ${profileUrl ? `<a href="${profileUrl}" target="_blank" style="display:block;text-align:center;padding:9px 16px;background:#E89042;color:#fff;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none;" onmouseover="this.style.background='#d4792e'" onmouseout="this.style.background='#E89042'">View full profile →</a>` : '<div style="font-size:12px;color:#aaa;text-align:center;padding:4px 0;">Profile page coming soon</div>'}
@@ -788,31 +865,54 @@
     /*************************************************************************
      * LEGEND FILTER LOGIC
      *************************************************************************/
-    let activeFilter = 'all'; // tracks current filter
+    let activeFilter = 'all';        // status filter: all | green | orange | red
+    let activeCountyFilter = null;   // county filter: null | county name
 
     const filterBadge     = document.getElementById('filter-badge');
     const filterBadgeDot  = document.getElementById('filter-badge-dot');
     const filterBadgeText = document.getElementById('filter-badge-text');
 
     const badgeColors = {
-      green:  { bg: '#327F5A', label: 'Registered only' },
+      green:  { bg: '#327F5A', label: 'Fully Registered only' },
       orange: { bg: '#E89042', label: 'In Process only' },
-      red:    { bg: '#AB3D41', label: 'Identified only' },
+      red:    { bg: '#AB3D41', label: 'Inventoried only' },
       all:    { bg: 'transparent', label: '' }
     };
 
-    function applyFilter(filter) {
-      activeFilter = filter;
+    function markerVisible(name) {
+      const color = pinColorsByName[name] || 'red';
+      const statusOk = activeFilter === 'all' || color === activeFilter;
+      const countyOk = !activeCountyFilter || (counties[activeCountyFilter] || []).includes(name);
+      return statusOk && countyOk;
+    }
 
-      // Show/hide markers
+    function updateFilterBadge() {
+      const parts = [];
+      if (activeCountyFilter) parts.push(activeCountyFilter);
+      if (activeFilter !== 'all') parts.push(badgeColors[activeFilter].label);
+      if (parts.length === 0) {
+        filterBadge.classList.add('hidden');
+        return;
+      }
+      filterBadgeText.textContent = parts.join(' · ');
+      filterBadgeDot.style.background = activeFilter !== 'all' ? badgeColors[activeFilter].bg : '#327F5A';
+      filterBadge.classList.remove('hidden');
+    }
+
+    function updateMapVisibility() {
       Object.entries(markers).forEach(([name, marker]) => {
-        const color = pinColorsByName[name] || 'red';
-        if (filter === 'all' || color === filter) {
+        if (markerVisible(name)) {
           if (!map.hasLayer(marker)) map.addLayer(marker);
         } else {
           if (map.hasLayer(marker)) map.removeLayer(marker);
         }
       });
+      updateFilterBadge();
+    }
+
+    function applyFilter(filter) {
+      activeFilter = filter;
+      updateMapVisibility();
 
       // Update button states
       document.querySelectorAll('.legend-btn').forEach(btn => {
@@ -824,16 +924,6 @@
           btn.classList.add('dimmed');
         }
       });
-
-      // Update filter badge on map
-      if (filter === 'all') {
-        filterBadge.classList.add('hidden');
-      } else {
-        const cfg = badgeColors[filter];
-        filterBadgeDot.style.background = cfg.bg;
-        filterBadgeText.textContent = cfg.label;
-        filterBadge.classList.remove('hidden');
-      }
     }
 
     // Wire up legend buttons
@@ -848,6 +938,39 @@
         }
       });
     });
+
+    // Click the map's filter badge to clear both filters at once
+    filterBadge.addEventListener('click', () => {
+      if (activeCountyFilter) clearCountyFilter();
+      if (activeFilter !== 'all') applyFilter('all');
+    });
+
+    /*************************************************************************
+     * COUNTY FILTER (sidebar county click -> isolate that county on the map)
+     *************************************************************************/
+    function refreshCountyButtonStyles() {
+      document.querySelectorAll('.county > button').forEach(b => {
+        const txt = b.querySelector('span:first-child').textContent;
+        b.classList.toggle('active-filter', txt === activeCountyFilter);
+      });
+    }
+
+    function setCountyFilter(countyName) {
+      activeCountyFilter = countyName;
+      updateMapVisibility();
+      refreshCountyButtonStyles();
+      const names = counties[countyName] || [];
+      const pts = names.filter(n => markers[n]).map(n => markers[n].getLatLng());
+      if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.3));
+    }
+
+    function clearCountyFilter() {
+      activeCountyFilter = null;
+      updateMapVisibility();
+      refreshCountyButtonStyles();
+      const markerList = Object.values(markers);
+      if (markerList.length) map.fitBounds(L.featureGroup(markerList).getBounds().pad(0.08));
+    }
 
     /*************************************************************************
      * SIDEBAR: counties accordion
@@ -885,14 +1008,17 @@
         countyEl.appendChild(list);
 
         button.addEventListener('click', () => {
-          const open = list.style.display === 'block';
+          const wasOpen = list.style.display === 'block';
           document.querySelectorAll('.communities-list').forEach(l => l.style.display = 'none');
           document.querySelectorAll('.county > button').forEach(b => {
             b.querySelector('span:last-child').textContent = '▸';
           });
-          if (!open) {
+          if (!wasOpen) {
             list.style.display = 'block';
             button.querySelector('span:last-child').textContent = '▾';
+            setCountyFilter(countyName);
+          } else {
+            clearCountyFilter();
           }
         });
 
@@ -1023,7 +1149,7 @@
         </div>
         <div class="stat-card s-green">
           <div class="stat-num" style="color:#327F5A">${green}</div>
-          <div class="stat-label" style="color:#327F5A">Registered</div>
+          <div class="stat-label" style="color:#327F5A">Fully Registered</div>
           <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(green/total*100)}%;background:#327F5A"></div></div>
           <div class="stat-sub">${Math.round(green/total*100)}% of total</div>
         </div>
@@ -1035,7 +1161,7 @@
         </div>
         <div class="stat-card s-red">
           <div class="stat-num" style="color:#AB3D41">${red}</div>
-          <div class="stat-label" style="color:#AB3D41">Identified</div>
+          <div class="stat-label" style="color:#AB3D41">Inventoried</div>
           <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(red/total*100)}%;background:#AB3D41"></div></div>
           <div class="stat-sub">${Math.round(red/total*100)}% of total</div>
         </div>
@@ -1058,7 +1184,7 @@
           <span style="text-align:center">Total</span>
           <span style="text-align:center;color:#327F5A">Reg.</span>
           <span style="text-align:center;color:#E89042">In Proc.</span>
-          <span style="text-align:center;color:#AB3D41">Identified</span>
+          <span style="text-align:center;color:#AB3D41">Inventoried</span>
         </div>
         ${rows}
       `;

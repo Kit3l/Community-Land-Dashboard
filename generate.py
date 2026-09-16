@@ -35,9 +35,9 @@ OUTPUT_DIR  = ROOT / "communities"
 
 # ── Status helpers ─────────────────────────────────────────────────────────────
 STATUS_LABELS = {
-    "green":  "✅ Registered",
-    "orange": "🟠 Adjudicated — not yet complete",
-    "red":    "🔴 Un-adjudicated",
+    "green":  "✅ Fully Registered",
+    "orange": "🟠 In Process",
+    "red":    "🔴 Inventoried",
 }
 
 PROGRESS = {
@@ -152,6 +152,9 @@ def generate():
             page = page.replace("{{POP_PENDING}}", "pending" if not pop else "")
             page = page.replace("{{REGISTERED_MEMBERS}}", f"{mem:,}" if mem else "—")
             page = page.replace("{{MEM_PENDING}}", "pending" if not mem else "")
+            land_category = community.get("landCategory")
+            page = page.replace("{{LAND_CATEGORY}}", land_category or "—")
+            page = page.replace("{{LAND_CATEGORY_PENDING}}", "pending" if not land_category else "")
             page = page.replace("{{LAT}}", coords_display)
             page = page.replace("{{LNG}}", "")
             page = page.replace("{{LAT_JS}}", str(lat) if lat else "null")

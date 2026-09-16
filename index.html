@@ -264,6 +264,18 @@
     .s-orange .s-card-count-num { color: var(--orange); }
     .s-red    .s-card-count-num { color: var(--red); }
 
+    .data-note {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-top: 28px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 12.5px; font-weight: 300; line-height: 1.6;
+      color: var(--muted);
+    }
+    .data-note strong { color: var(--ink); font-weight: 700; }
+
     /* ── FOOTER ──────────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
@@ -309,7 +321,7 @@
       <h1>Securing<br><em>Community</em><br>Land Rights</h1>
       <p class="hero-body">
         A live geographic platform tracking the land registration journey of
-        58 pastoral and dryland communities across 11 counties in Kenya —
+        91 pastoral and dryland communities across 13 counties in Kenya —
         from identification through adjudication to full registration under
         the Community Land Act 2016.
       </p>
@@ -321,15 +333,15 @@
 
     <div class="map-preview">
       <div id="preview-map"></div>
-      <div class="map-badge">58 Communities</div>
+      <div class="map-badge">91 Communities</div>
     </div>
   </div>
 
   <!-- STATS STRIP -->
   <div class="stats-strip">
-    <div class="stat"><div class="stat-num">58</div><div class="stat-label">Communities tracked</div></div>
-    <div class="stat"><div class="stat-num">11</div><div class="stat-label">Counties covered</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Fully registered</div></div>
+    <div class="stat"><div class="stat-num">91</div><div class="stat-label">Communities tracked</div></div>
+    <div class="stat"><div class="stat-num">13</div><div class="stat-label">Counties covered</div></div>
+    <div class="stat"><div class="stat-num">58</div><div class="stat-label">Fully registered</div></div>
     <div class="stat"><div class="stat-num">2016</div><div class="stat-label">Community Land Act</div></div>
   </div>
 
@@ -340,31 +352,36 @@
     <div class="status-cards">
       <div class="s-card s-green">
         <div class="s-card-dot"></div>
-        <div class="s-card-title">Registered</div>
+        <div class="s-card-title">Fully Registered</div>
         <div class="s-card-desc">Community land certificate issued under the Community Land Act 2016. Land rights are fully secured and legally recognised.</div>
         <div class="s-card-count">
           <div class="s-card-count-label">Communities registered</div>
-          <div class="s-card-count-num">3</div>
+          <div class="s-card-count-num">58</div>
         </div>
       </div>
       <div class="s-card s-orange">
         <div class="s-card-dot"></div>
         <div class="s-card-title">In Process</div>
-        <div class="s-card-desc">Adjudication is underway or complete but the final registration certificate has not yet been issued.</div>
+        <div class="s-card-desc">The community is in the process of registration — adjudication is underway or complete, but the final certificate has not yet been issued.</div>
         <div class="s-card-count">
           <div class="s-card-count-label">Communities in process</div>
-          <div class="s-card-count-num">37</div>
+          <div class="s-card-count-num">28</div>
         </div>
       </div>
       <div class="s-card s-red">
         <div class="s-card-dot"></div>
-        <div class="s-card-title">Identified</div>
-        <div class="s-card-desc">Community has been identified and engaged but has not yet entered the formal adjudication process.</div>
+        <div class="s-card-title">Inventoried</div>
+        <div class="s-card-desc">Inventory submitted, but no formal registration process has begun yet.</div>
         <div class="s-card-count">
-          <div class="s-card-count-label">Communities identified</div>
-          <div class="s-card-count-num">18</div>
+          <div class="s-card-count-label">Communities inventoried</div>
+          <div class="s-card-count-num">5</div>
         </div>
       </div>
+    </div>
+
+    <div class="data-note">
+      <span aria-hidden="true">ⓘ</span>
+      <span><strong>A note on data:</strong> Figures on this page reflect information collected from DLCI, county land offices, and partner organisations at the time of publishing. Coverage varies by community — some records (boundaries, population, registration dates) are still pending confirmation and will be updated as more accurate information becomes available.</span>
     </div>
   </section>
 
@@ -385,16 +402,23 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(previewMap);
 
     const pins = [
-      [2.5705,34.9889,'red'],[3.7168,34.9589,'red'],[2.381,35.625,'red'],
-      [1.62759,40.00681,'orange'],[1.0,40.96,'orange'],[2.0883,40.0223,'orange'],
-      [3.04,38.76,'orange'],[2.3,37.9,'orange'],[2.131,37.921,'orange'],
-      [2.36122,34.95148,'orange'],[1.97343,35.20563,'red'],[2.3439,34.9274,'orange'],
-      [0.95833,38.53315,'orange'],[1.06729,38.66619,'orange'],[-0.7322,39.8337,'green'],
-      [1.243904,36.974541,'green'],[1.85414,37.13594,'green'],
-      [0.7019,37.3481,'orange'],[0.6622,37.6681,'orange'],
-      [0.4867,36.9531,'orange'],[0.3931,37.1636,'orange'],
-      [1.4108,37.2131,'orange'],[1.0689,36.497,'orange'],
-      [1.4464,35.1378,'orange'],[2.0256,34.9939,'red'],[2.132,35.0603,'red'],
+      [2.5705,34.9889,'orange'],[3.7168,34.9589,'red'],[2.381,35.625,'green'],
+      [2.757792,34.877594,'orange'],[2.653925,35.016592,'orange'],[2.389772,35.016461,'orange'],
+      [2.4839,35.697,'green'],[1.9048,35.9253,'green'],[1.9842,36.1053,'red'],
+      [1.9541,36.0295,'red'],[2.3681,35.4258,'red'],[1.62759,40.00681,'orange'],
+      [1.0,40.96,'orange'],[2.0883,40.0223,'orange'],[3.04,38.76,'orange'],
+      [2.3,37.9,'orange'],[2.131,37.921,'orange'],[2.36122,34.95148,'orange'],
+      [1.97343,35.20563,'red'],[2.3439,34.9274,'green'],[1.4464,35.1378,'orange'],
+      [1.3708,35.1131,'orange'],[1.4542,35.3061,'orange'],[1.6717,35.1869,'orange'],
+      [1.4614,35.3356,'orange'],[2.0256,34.9939,'green'],[2.132,35.0603,'green'],
+      [2.01,35.0842,'green'],[2.132783,35.192714,'green'],[0.95833,38.53315,'orange'],
+      [1.06729,38.66619,'orange'],[0.318539,38.193773,'orange'],[-0.7322,39.8337,'green'],
+      [1.243904,36.974541,'green'],[1.85414,37.13594,'green'],[0.7019,37.3481,'orange'],
+      [0.6622,37.6681,'orange'],[0.9344,37.0606,'orange'],[0.8197,37.1672,'orange'],
+      [0.8392,37.0508,'orange'],[1.4108,37.2131,'orange'],[1.4108,37.2131,'orange'],
+      [1.0689,36.497,'orange'],[0.9478,37.1986,'green'],[1.1628,37.4942,'orange'],
+      [0.4867,36.9531,'green'],[0.3931,37.1636,'green'],[0.4617,37.2067,'green'],
+      [0.4989,37.3181,'green'],[0.4108,37.0603,'green'],[0.4261,37.0342,'green'],
     ];
 
     const colMap = { green:'#327F5A', orange:'#E89042', red:'#AB3D41' };
