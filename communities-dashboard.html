@@ -546,24 +546,24 @@
      * DATA
      *************************************************************************/
     const communityData = {
-      "Lorengippi": { size: "1200 sq km", population: 5000, registeredMembers: 3780 },
-      "Turkana West": { size: "1500 sq km", population: 5000, registeredMembers: 3780 },
-      "Lokichar": { size: "980 sq km", population: 5000, registeredMembers: 3780 },
-      "Leheley": { size: "1100 sq km", population: 5000, registeredMembers: 3780 },
-      "Diff": { size: "1230 sq km", population: 5000, registeredMembers: 3780 },
-      "Sabuli": { size: "1050 sq km", population: 5000, registeredMembers: 3780 },
-      "Obbu": { size: "26000 ha", population: 5000, registeredMembers: 3780 },
-      "Obittu": { size: "40000 ha", population: 6000, registeredMembers: 4000 },
-      "Walda": { size: "1120 sq km", population: 5000, registeredMembers: 3780 },
-      "Lokitonyala": { size: "950 sq km", population: 5000, registeredMembers: 3780 },
-      "Kasei": { size: "1180 sq km", population: 5000, registeredMembers: 3780 },
-      "Alale": { size: "1300 sq km", population: 5000, registeredMembers: 3780 },
-      "Charri": { size: "870 sq km", population: 5000, registeredMembers: 3780 },
-      "Cherab": { size: "1250 sq km", population: 5000, registeredMembers: 3780 },
-      "Kinna - Kulamawe - Gotu Dedha": { size: "1000 sq km", population: 5000, registeredMembers: 3780 },
-      "Kamuthe": { size: "40000 ha", population: 6000, registeredMembers: 4000 },
-      "Nairimirimo": { size: "40,000 ha", population: 3000, registeredMembers: 1647 },
-      "Arisim": { size: "55,000 ha", population: 30000, registeredMembers: 9000 }
+      "Lorengippi": { size: "1200 sq km", population: 5000 },
+      "Turkana West": { size: "1500 sq km", population: 5000 },
+      "Lokichar": { size: "980 sq km", population: 5000 },
+      "Leheley": { size: "1100 sq km", population: 5000 },
+      "Diff": { size: "1230 sq km", population: 5000 },
+      "Sabuli": { size: "1050 sq km", population: 5000 },
+      "Obbu": { size: "26000 ha", population: 5000 },
+      "Obittu": { size: "40000 ha", population: 6000 },
+      "Walda": { size: "1120 sq km", population: 5000 },
+      "Lokitonyala": { size: "950 sq km", population: 5000 },
+      "Kasei": { size: "1180 sq km", population: 5000 },
+      "Alale": { size: "1300 sq km", population: 5000 },
+      "Charri": { size: "870 sq km", population: 5000 },
+      "Cherab": { size: "1250 sq km", population: 5000 },
+      "Kinna - Kulamawe - Gotu Dedha": { size: "1000 sq km", population: 5000 },
+      "Kamuthe": { size: "40000 ha", population: 6000 },
+      "Nairimirimo": { size: "40,000 ha", population: 3000 },
+      "Arisim": { size: "55,000 ha", population: 30000 }
     };
 
     const communityCoordinates = {
@@ -835,10 +835,6 @@
                 <tr style="border-bottom:1px solid #f0d9c2;">
                   <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Population</td>
                   <td style="padding:5px 0;color:#1a1a1a;">${data.population ? data.population.toLocaleString() : '—'}</td>
-                </tr>
-                <tr style="border-bottom:1px solid #f0d9c2;">
-                  <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Members</td>
-                  <td style="padding:5px 0;color:#1a1a1a;">${data.registeredMembers ? data.registeredMembers.toLocaleString() : '—'}</td>
                 </tr>
                 <tr>
                   <td style="font-weight:700;padding:5px 0;color:#6b5a4e;">Land category</td>

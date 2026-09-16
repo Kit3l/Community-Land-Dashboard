@@ -138,7 +138,6 @@ def generate():
 
             size = community.get("size") or "—"
             pop  = community.get("population")
-            mem  = community.get("registeredMembers")
 
             page = template
             page = page.replace("{{COMMUNITY_NAME}}", name)
@@ -150,8 +149,6 @@ def generate():
             page = page.replace("{{SIZE_PENDING}}", "pending" if size == "—" else "")
             page = page.replace("{{POPULATION}}", f"{pop:,}" if pop else "—")
             page = page.replace("{{POP_PENDING}}", "pending" if not pop else "")
-            page = page.replace("{{REGISTERED_MEMBERS}}", f"{mem:,}" if mem else "—")
-            page = page.replace("{{MEM_PENDING}}", "pending" if not mem else "")
             land_category = community.get("landCategory")
             page = page.replace("{{LAND_CATEGORY}}", land_category or "—")
             page = page.replace("{{LAND_CATEGORY_PENDING}}", "pending" if not land_category else "")
