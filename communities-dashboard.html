@@ -418,13 +418,13 @@
 
     .county-breakdown { border-radius:8px; overflow:hidden; border:1px solid rgba(0,0,0,0.07); font-size:13px; }
     .cb-header {
-      display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
+      display:grid; grid-template-columns:1fr 52px 52px 52px;
       padding:8px 12px; background:#f0d9c2;
       font-size:11px; font-weight:700; color:#6b5a4e;
       border-bottom:1px solid rgba(0,0,0,0.06);
     }
     .cb-row {
-      display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
+      display:grid; grid-template-columns:1fr 52px 52px 52px;
       padding:8px 12px; border-bottom:1px solid rgba(0,0,0,0.04);
       align-items:center; transition: background 0.1s;
     }
@@ -1119,68 +1119,65 @@
      * STATS PANEL: compute and render on load
      *************************************************************************/
     (function buildStats() {
-      const allCommunities = Array.from(new Set(Object.values(counties).flat()));
-      let green = 0, orange = 0, red = 0;
+      // Summary statistics panel — figures reflect the latest registration
+      // count supplied by DLCI and are tracked separately from the per-
+      // community pins/list on the map.
+      const countyStats = {
+        "Turkana":       { total: 6,  registered: 6 },
+        "West Pokot":    { total: 9,  registered: 4 },
+        "Samburu":       { total: 25, registered: 2 },
+        "Laikipia":      { total: 13, registered: 0 },
+        "Baringo":       { total: 2,  registered: 2 },
+        "Kajiado":       { total: 2,  registered: 0 },
+        "Garissa":       { total: 1,  registered: 1 },
+        "Taita Taveta":  { total: 5,  registered: 0 },
+        "Tana River":    { total: 1,  registered: 1 }
+      };
 
-      const countyStats = {};
-      Object.entries(counties).forEach(([county, comms]) => {
-        countyStats[county] = { total: comms.length, green: 0, orange: 0, red: 0 };
-        comms.forEach(c => {
-          const col = pinColorsByName[c] || "red";
-          countyStats[county][col]++;
-          if (col === "green") green++;
-          else if (col === "orange") orange++;
-          else red++;
-        });
-      });
-
-      const total = allCommunities.length;
+      const total = Object.values(countyStats).reduce((sum, s) => sum + s.total, 0);
+      const registered = Object.values(countyStats).reduce((sum, s) => sum + s.registered, 0);
+      const remaining = total - registered;
 
       const statsGrid = document.getElementById("stats-grid");
       statsGrid.innerHTML = `
         <div class="stat-card total">
           <div class="stat-num">${total}</div>
           <div class="stat-label">Total communities</div>
-          <div class="stat-sub">${Object.keys(counties).length} counties</div>
+          <div class="stat-sub">${Object.keys(countyStats).length} counties</div>
         </div>
         <div class="stat-card s-green">
-          <div class="stat-num" style="color:#327F5A">${green}</div>
+          <div class="stat-num" style="color:#327F5A">${registered}</div>
           <div class="stat-label" style="color:#327F5A">Fully Registered</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(green/total*100)}%;background:#327F5A"></div></div>
-          <div class="stat-sub">${Math.round(green/total*100)}% of total</div>
-        </div>
-        <div class="stat-card s-orange">
-          <div class="stat-num" style="color:#E89042">${orange}</div>
-          <div class="stat-label" style="color:#E89042">In Process</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(orange/total*100)}%;background:#E89042"></div></div>
-          <div class="stat-sub">${Math.round(orange/total*100)}% of total</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(registered/total*100)}%;background:#327F5A"></div></div>
+          <div class="stat-sub">${Math.round(registered/total*100)}% of total</div>
         </div>
         <div class="stat-card s-red">
-          <div class="stat-num" style="color:#AB3D41">${red}</div>
-          <div class="stat-label" style="color:#AB3D41">Inventoried</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(red/total*100)}%;background:#AB3D41"></div></div>
-          <div class="stat-sub">${Math.round(red/total*100)}% of total</div>
+          <div class="stat-num" style="color:#AB3D41">${remaining}</div>
+          <div class="stat-label" style="color:#AB3D41">Remaining</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(remaining/total*100)}%;background:#AB3D41"></div></div>
+          <div class="stat-sub">${Math.round(remaining/total*100)}% of total</div>
         </div>
       `;
 
       const breakdown = document.getElementById("county-breakdown");
-      const rows = Object.entries(countyStats).map(([county, s]) => `
+      const rows = Object.entries(countyStats).map(([county, s]) => {
+        const rem = s.total - s.registered;
+        return `
         <div class="cb-row">
           <span style="font-weight:600">${county}</span>
           <span class="cb-num">${s.total}</span>
-          <span style="text-align:center">${s.green > 0 ? `<span class="cb-pill g">${s.green}</span>` : `<span class="cb-pill z">—</span>`}</span>
-          <span style="text-align:center">${s.orange > 0 ? `<span class="cb-pill o">${s.orange}</span>` : `<span class="cb-pill z">—</span>`}</span>
-          <span style="text-align:center">${s.red > 0 ? `<span class="cb-pill r">${s.red}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${s.registered > 0 ? `<span class="cb-pill g">${s.registered}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${rem > 0 ? `<span class="cb-pill r">${rem}</span>` : `<span class="cb-pill z">—</span>`}</span>
         </div>
-      `).join("");
+      `;
+      }).join("");
 
       breakdown.innerHTML = `
         <div class="cb-header">
           <span>County</span>
           <span style="text-align:center">Total</span>
           <span style="text-align:center;color:#327F5A">Reg.</span>
-          <span style="text-align:center;color:#E89042">In Proc.</span>
-          <span style="text-align:center;color:#AB3D41">Inventoried</span>
+          <span style="text-align:center;color:#AB3D41">Remaining</span>
         </div>
         ${rows}
       `;
