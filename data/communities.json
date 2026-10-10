@@ -71,7 +71,7 @@
         {
           "name": "Lokwii",
           "slug": "lokwii",
-          "status": "red",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.9842,
@@ -79,12 +79,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Trust Land"
         },
         {
           "name": "Kangitit",
           "slug": "kangitit",
-          "status": "red",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.9541,
@@ -92,12 +92,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Trust Land"
         },
         {
           "name": "Lokapel",
           "slug": "lokapel",
-          "status": "red",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 2.3681,
@@ -105,7 +105,7 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Trust Land"
         },
         {
           "name": "Lokiriama",
@@ -132,6 +132,58 @@
           "registrationDate": null,
           "landCategory": null,
           "description": ""
+        },
+        {
+          "name": "Lochwaa",
+          "slug": "lochwaa",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
+        },
+        {
+          "name": "Kasuroi",
+          "slug": "kasuroi",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
+        },
+        {
+          "name": "Nakwapua",
+          "slug": "nakwapua",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
+        },
+        {
+          "name": "Urum",
+          "slug": "urum",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": 2.957088,
+          "lng": 34.697032,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
         }
       ]
     },
@@ -255,7 +307,7 @@
         {
           "name": "Alale",
           "slug": "alale",
-          "status": "green",
+          "status": "orange",
           "size": "1,300 sq km",
           "population": 5000,
           "lat": 2.3439,
@@ -268,7 +320,7 @@
         {
           "name": "Chesra",
           "slug": "chesra",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.4464,
@@ -276,12 +328,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Chemwochoi B",
           "slug": "chemwochoi-b",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.3708,
@@ -289,12 +341,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Ortum West",
           "slug": "ortum-west",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.4542,
@@ -302,12 +354,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Nakwijit",
           "slug": "nakwijit",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.6717,
@@ -315,12 +367,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Sobukwo",
           "slug": "sobukwo",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.4614,
@@ -328,7 +380,7 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Kiwawa",
@@ -491,7 +543,7 @@
         {
           "name": "Ngutuk Ongiron",
           "slug": "ngutuk-ongiron",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 0.7019,
@@ -499,12 +551,12 @@
           "adjudicationStart": "2020-03-01",
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Girgir",
           "slug": "girgir",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 0.6622,
@@ -512,12 +564,12 @@
           "adjudicationStart": "2020-05-01",
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Lpus",
           "slug": "lpus",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 0.9344,
@@ -525,12 +577,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Sesia",
           "slug": "sesia",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 0.8197,
@@ -538,12 +590,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Ltirimin",
           "slug": "ltirimin",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 0.8392,
@@ -551,12 +603,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Ngilai Central",
           "slug": "ngilai-central",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.4108,
@@ -564,12 +616,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Ngilai West",
           "slug": "ngilai-west",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.4108,
@@ -577,12 +629,12 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Tinga B",
           "slug": "tinga-b",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.0689,
@@ -590,7 +642,7 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Nkaroni",
@@ -608,7 +660,7 @@
         {
           "name": "Ngilai",
           "slug": "ngilai",
-          "status": "orange",
+          "status": "green",
           "size": "—",
           "population": null,
           "lat": 1.1628,
@@ -616,7 +668,7 @@
           "adjudicationStart": null,
           "registrationDate": null,
           "description": "",
-          "landCategory": null
+          "landCategory": "Former Group Ranch"
         },
         {
           "name": "Lodokejek",
@@ -903,6 +955,97 @@
           "registrationDate": null,
           "landCategory": "Former Group Ranch",
           "description": ""
+        },
+        {
+          "name": "Lesepen",
+          "slug": "lesepen",
+          "status": "green",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": "Former Group Ranch"
+        },
+        {
+          "name": "Loikumkum",
+          "slug": "loikumkum",
+          "status": "green",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": "Former Group Ranch"
+        },
+        {
+          "name": "Masikita",
+          "slug": "masikita",
+          "status": "green",
+          "size": null,
+          "population": null,
+          "lat": 1.608798,
+          "lng": 36.947465,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": "Former Group Ranch"
+        },
+        {
+          "name": "Opiroi",
+          "slug": "opiroi",
+          "status": "green",
+          "size": null,
+          "population": null,
+          "lat": 1.158656,
+          "lng": 36.809545,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": "Former Group Ranch"
+        },
+        {
+          "name": "Kalamodang",
+          "slug": "kalamodang",
+          "status": "green",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": "Former Group Ranch"
+        },
+        {
+          "name": "Loonjorin/Sesiai",
+          "slug": "loonjorinsesiai",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": 2.266862,
+          "lng": 36.831717,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
+        },
+        {
+          "name": "Ndonyo Nasipa",
+          "slug": "ndonyo-nasipa",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": 1.326297,
+          "lng": 37.125963,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
         }
       ]
     },
@@ -1108,6 +1251,19 @@
           "registrationDate": null,
           "description": "",
           "landCategory": "Former Trust Land"
+        },
+        {
+          "name": "Korosi",
+          "slug": "korosi",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": null,
+          "lng": null,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
         }
       ]
     },
@@ -1227,6 +1383,19 @@
           "registrationDate": null,
           "landCategory": "Former Group Ranch",
           "description": ""
+        },
+        {
+          "name": "Mgeno",
+          "slug": "mgeno",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": -3.581447,
+          "lng": 38.51468,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
         }
       ]
     },
@@ -1245,6 +1414,24 @@
           "registrationDate": null,
           "landCategory": "Former Trust Land",
           "description": "Ancestral lands belonging to the indigenous Boni Community, recorded as titled community land under the Community Land Act 2016."
+        }
+      ]
+    },
+    "Kilifi": {
+      "slug": "kilifi",
+      "communities": [
+        {
+          "name": "Gede/Mitangani",
+          "slug": "gedemitangani",
+          "status": "orange",
+          "size": null,
+          "population": null,
+          "lat": -3.532999,
+          "lng": 39.328435,
+          "adjudicationStart": null,
+          "registrationDate": null,
+          "description": "",
+          "landCategory": null
         }
       ]
     }

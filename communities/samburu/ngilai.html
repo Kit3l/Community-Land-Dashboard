@@ -167,9 +167,9 @@
   <div class="hero">
     <div class="hero-county">Samburu County</div>
     <h1 class="hero-name">Ngilai</h1>
-    <div class="hero-status orange">
+    <div class="hero-status green">
       <span class="status-dot"></span>
-      🟠 In Process
+      ✅ Fully Registered
     </div>
   </div>
 
@@ -200,7 +200,7 @@
           </div>
           <div class="fact">
             <div class="fact-label">Land category</div>
-            <div class="fact-value pending">—</div>
+            <div class="fact-value ">Former Group Ranch</div>
           </div>
         </div>
         
@@ -233,15 +233,15 @@
           <div class="tl-item">
             <div class="tl-dot done">✓</div>
             <div class="tl-content">
-              <div class="tl-date">In progress</div>
+              <div class="tl-date">Complete</div>
               <div class="tl-label">Adjudication completed</div>
               <div class="tl-note">All boundaries agreed and gazetted</div>
             </div>
           </div>
           <div class="tl-item">
-            <div class="tl-dot future">⏳</div>
+            <div class="tl-dot done">📜</div>
             <div class="tl-content">
-              <div class="tl-date">Pending</div>
+              <div class="tl-date">—</div>
               <div class="tl-label">Community Land Register certificate issued</div>
               <div class="tl-note">Final registration under CLA 2016</div>
             </div>
@@ -278,7 +278,7 @@
               <div class="doc-name">Community Land Register certificate</div>
               <div class="doc-meta">Issued by National Land Commission</div>
             </div>
-            <span class="doc-badge pending">Pending upload</span>
+            <span class="doc-badge ">Available</span>
           </div>
         </div>
       </div>
@@ -349,10 +349,10 @@
         <div class="progress-wrap">
           <div class="progress-label">
             <span>Current stage</span>
-            <span>55%</span>
+            <span>100%</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" id="progress-fill" style="width:0%;background:#ef6c00"></div>
+            <div class="progress-fill" id="progress-fill" style="width:0%;background:#2e7d32"></div>
           </div>
           <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;">
             <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
@@ -384,7 +384,7 @@
     // Mini-map
     const lat = 1.1628;
     const lng = 37.4942;
-    const status = 'orange';
+    const status = 'green';
     const colors = { green: '#2e7d32', orange: '#ef6c00', red: '#c62828' };
 
     if (lat && lng) {
@@ -406,7 +406,7 @@
 
     // Animate progress bar on load
     setTimeout(() => {
-      document.getElementById('progress-fill').style.width = '55%';
+      document.getElementById('progress-fill').style.width = '100%';
     }, 300);
   </script>
 </body>

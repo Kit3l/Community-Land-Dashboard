@@ -418,13 +418,13 @@
 
     .county-breakdown { border-radius:8px; overflow:hidden; border:1px solid rgba(0,0,0,0.07); font-size:13px; }
     .cb-header {
-      display:grid; grid-template-columns:1fr 52px 52px 52px;
+      display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
       padding:8px 12px; background:#f0d9c2;
       font-size:11px; font-weight:700; color:#6b5a4e;
       border-bottom:1px solid rgba(0,0,0,0.06);
     }
     .cb-row {
-      display:grid; grid-template-columns:1fr 52px 52px 52px;
+      display:grid; grid-template-columns:1fr 52px 52px 52px 52px;
       padding:8px 12px; border-bottom:1px solid rgba(0,0,0,0.04);
       align-items:center; transition: background 0.1s;
     }
@@ -617,7 +617,14 @@
       "Kurikuri": [0.4617, 37.2067],
       "Lekurruki": [0.4989, 37.3181],
       "Ilpolei": [0.4108, 37.0603],
-      "Musul": [0.4261, 37.0342]
+      "Musul": [0.4261, 37.0342],
+      "Masikita": [1.608798, 36.947465],
+      "Ndonyo Nasipa": [1.326297, 37.125963],
+      "Loonjorin/Sesiai": [2.266862, 36.831717],
+      "Opiroi": [1.158656, 36.809545],
+      "Urum": [2.957088, 34.697032],
+      "Mgeno": [-3.581447, 38.51468],
+      "Gede/Mitangani": [-3.532999, 39.328435]
     };
 
     const pinColorsByName = {
@@ -629,9 +636,9 @@
       "Lokichar": "green",
       "Kapese": "green",
       "Nakukulas": "green",
-      "Lokwii": "red",
-      "Kangitit": "red",
-      "Lokapel": "red",
+      "Lokwii": "green",
+      "Kangitit": "green",
+      "Lokapel": "green",
       "Mbaru": "green",
       "Leheley": "orange",
       "Diff": "orange",
@@ -641,31 +648,31 @@
       "Walda": "orange",
       "Lokitonyala": "orange",
       "Kasei": "red",
-      "Alale": "green",
+      "Alale": "orange",
       "Charri": "orange",
       "Cherab": "orange",
       "Kinna - Kulamawe - Gotu Dedha": "orange",
       "Kamuthe": "green",
       "Nairimirimo": "green",
       "Arisim": "green",
-      "Chesra": "orange",
-      "Chemwochoi B": "orange",
-      "Ortum West": "orange",
-      "Nakwijit": "orange",
-      "Sobukwo": "orange",
+      "Chesra": "green",
+      "Chemwochoi B": "green",
+      "Ortum West": "green",
+      "Nakwijit": "green",
+      "Sobukwo": "green",
       "Kiwawa": "green",
       "Kases": "green",
       "Chelopoy": "green",
-      "Ngutuk Ongiron": "orange",
-      "Girgir": "orange",
-      "Lpus": "orange",
-      "Sesia": "orange",
-      "Ltirimin": "orange",
-      "Ngilai Central": "orange",
-      "Ngilai West": "orange",
-      "Tinga B": "orange",
+      "Ngutuk Ongiron": "green",
+      "Girgir": "green",
+      "Lpus": "green",
+      "Sesia": "green",
+      "Ltirimin": "green",
+      "Ngilai Central": "green",
+      "Ngilai West": "green",
+      "Tinga B": "green",
       "Nkaroni": "green",
-      "Ngilai": "orange",
+      "Ngilai": "green",
       "Kijabe": "green",
       "Munishoi": "green",
       "Ilmotiok": "green",
@@ -711,7 +718,21 @@
       "Ndara 'B'": "green",
       "Ishangaiwishi": "green",
       "Oza": "green",
-      "Boni": "green"
+      "Boni": "green",
+      "Lesepen": "green",
+      "Loikumkum": "green",
+      "Masikita": "green",
+      "Opiroi": "green",
+      "Kalamodang": "green",
+      "Loonjorin/Sesiai": "orange",
+      "Ndonyo Nasipa": "orange",
+      "Lochwaa": "orange",
+      "Kasuroi": "orange",
+      "Nakwapua": "orange",
+      "Urum": "orange",
+      "Korosi": "orange",
+      "Mgeno": "orange",
+      "Gede/Mitangani": "orange"
     };
 
     const landCategoryByName = {
@@ -734,23 +755,25 @@
       "Losesia": "Former Group Ranch",
       "Teri 'B'": "Former Group Ranch", "Mbulia": "Former Group Ranch", "Ndara 'B'": "Former Group Ranch",
       "Ishangaiwishi": "Former Group Ranch", "Oza": "Former Group Ranch",
-      "Boni": "Former Trust Land"
+      "Boni": "Former Trust Land",
+      "Lokwii": "Former Trust Land", "Kangitit": "Former Trust Land", "Lokapel": "Former Trust Land", "Chesra": "Former Group Ranch", "Chemwochoi B": "Former Group Ranch", "Ortum West": "Former Group Ranch", "Nakwijit": "Former Group Ranch", "Sobukwo": "Former Group Ranch", "Ngutuk Ongiron": "Former Group Ranch", "Girgir": "Former Group Ranch", "Lpus": "Former Group Ranch", "Sesia": "Former Group Ranch", "Ltirimin": "Former Group Ranch", "Ngilai Central": "Former Group Ranch", "Ngilai West": "Former Group Ranch", "Tinga B": "Former Group Ranch", "Ngilai": "Former Group Ranch", "Lesepen": "Former Group Ranch", "Loikumkum": "Former Group Ranch", "Masikita": "Former Group Ranch", "Opiroi": "Former Group Ranch", "Kalamodang": "Former Group Ranch"
     };
 
     const counties = {
-      "Turkana": ["Lorengippi","Turkana West","Lokichar","Kapese","Nakukulas","Lokwii","Kangitit","Lokapel","Lokiriama","Nakurio"],
+      "Turkana": ["Lorengippi","Turkana West","Lokichar","Kapese","Nakukulas","Lokwii","Kangitit","Lokapel","Lokiriama","Nakurio","Lochwaa","Kasuroi","Nakwapua","Urum"],
       "Wajir": ["Leheley","Diff","Sabuli"],
       "Marsabit": ["Obbu","Obittu","Walda"],
       "West Pokot": ["Lokitonyala","Kasei","Alale","Chesra","Chemwochoi B","Ortum West","Nakwijit","Sobukwo","Kiwawa","Kases","Chelopoy","Mbaru","Kalapata"],
       "Isiolo": ["Charri","Cherab","Kinna - Kulamawe - Gotu Dedha"],
       "Garissa": ["Kamuthe"],
-      "Samburu": ["Nairimirimo","Arisim","Ngutuk Ongiron","Girgir","Lpus","Sesia","Ltirimin","Ngilai Central","Ngilai West","Tinga B","Nkaroni","Ngilai","Lodokejek","Ndonyo Wasin","Raraiti","Lenguruma","Lbarta","South Horr","Morijo","Loosuk","Angata Nanyekie","Pura","Kirimon","Amaiya","Lpartuk","Logorate","Barsaloi","Marti","Nonkeek","Nachola","Sarara","Sapache","Sereolupi","Losesia"],
+      "Samburu": ["Nairimirimo","Arisim","Ngutuk Ongiron","Girgir","Lpus","Sesia","Ltirimin","Ngilai Central","Ngilai West","Tinga B","Nkaroni","Ngilai","Lodokejek","Ndonyo Wasin","Raraiti","Lenguruma","Lbarta","South Horr","Morijo","Loosuk","Angata Nanyekie","Pura","Kirimon","Amaiya","Lpartuk","Logorate","Barsaloi","Marti","Nonkeek","Nachola","Sarara","Sapache","Sereolupi","Losesia","Lesepen","Loikumkum","Masikita","Opiroi","Kalamodang","Loonjorin/Sesiai","Ndonyo Nasipa"],
       "Laikipia": ["Kijabe","Munishoi","Ilmotiok","Tiamamut","Koija","Inkiloriti","Kurikuri","Murupusi","Lekurruki","Ilngwesi I","Ilngwesi II - Mayianat","Ilpolei","Musul"],
-      "Taita Taveta": ["Teri 'B'","Mbulia","Ndara 'B'","Ishangaiwishi","Oza"],
+      "Taita Taveta": ["Teri 'B'","Mbulia","Ndara 'B'","Ishangaiwishi","Oza","Mgeno"],
       "Lamu": ["Boni"],
-      "Baringo": ["Paka","Kokwa Island"],
+      "Baringo": ["Paka","Kokwa Island","Korosi"],
       "Kajiado": ["Shompole","Olkeri"],
-      "Tana River": ["Wayu Daba"]
+      "Tana River": ["Wayu Daba"],
+      "Kilifi": ["Gede/Mitangani"]
     };
 
     /*************************************************************************
@@ -761,7 +784,8 @@
       'West Pokot': 'west-pokot', 'Isiolo': 'isiolo', 'Garissa': 'garissa',
       'Samburu': 'samburu', 'Laikipia': 'laikipia', 'Baringo': 'baringo',
       'Kajiado': 'kajiado', 'Tana River': 'tana-river',
-      'Taita Taveta': 'taita-taveta', 'Lamu': 'lamu'
+      'Taita Taveta': 'taita-taveta', 'Lamu': 'lamu',
+      'Kilifi': 'kilifi'
     };
 
     function communitySlug(name) {
@@ -1119,65 +1143,68 @@
      * STATS PANEL: compute and render on load
      *************************************************************************/
     (function buildStats() {
-      // Summary statistics panel — figures reflect the latest registration
-      // count supplied by DLCI and are tracked separately from the per-
-      // community pins/list on the map.
-      const countyStats = {
-        "Turkana":       { total: 6,  registered: 6 },
-        "West Pokot":    { total: 9,  registered: 4 },
-        "Samburu":       { total: 25, registered: 2 },
-        "Laikipia":      { total: 13, registered: 0 },
-        "Baringo":       { total: 2,  registered: 2 },
-        "Kajiado":       { total: 2,  registered: 0 },
-        "Garissa":       { total: 1,  registered: 1 },
-        "Taita Taveta":  { total: 5,  registered: 0 },
-        "Tana River":    { total: 1,  registered: 1 }
-      };
+      const allCommunities = Array.from(new Set(Object.values(counties).flat()));
+      let green = 0, orange = 0, red = 0;
 
-      const total = Object.values(countyStats).reduce((sum, s) => sum + s.total, 0);
-      const registered = Object.values(countyStats).reduce((sum, s) => sum + s.registered, 0);
-      const remaining = total - registered;
+      const countyStats = {};
+      Object.entries(counties).forEach(([county, comms]) => {
+        countyStats[county] = { total: comms.length, green: 0, orange: 0, red: 0 };
+        comms.forEach(c => {
+          const col = pinColorsByName[c] || "red";
+          countyStats[county][col]++;
+          if (col === "green") green++;
+          else if (col === "orange") orange++;
+          else red++;
+        });
+      });
+
+      const total = allCommunities.length;
 
       const statsGrid = document.getElementById("stats-grid");
       statsGrid.innerHTML = `
         <div class="stat-card total">
           <div class="stat-num">${total}</div>
           <div class="stat-label">Total communities</div>
-          <div class="stat-sub">${Object.keys(countyStats).length} counties</div>
+          <div class="stat-sub">${Object.keys(counties).length} counties</div>
         </div>
         <div class="stat-card s-green">
-          <div class="stat-num" style="color:#327F5A">${registered}</div>
+          <div class="stat-num" style="color:#327F5A">${green}</div>
           <div class="stat-label" style="color:#327F5A">Fully Registered</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(registered/total*100)}%;background:#327F5A"></div></div>
-          <div class="stat-sub">${Math.round(registered/total*100)}% of total</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(green/total*100)}%;background:#327F5A"></div></div>
+          <div class="stat-sub">${Math.round(green/total*100)}% of total</div>
+        </div>
+        <div class="stat-card s-orange">
+          <div class="stat-num" style="color:#E89042">${orange}</div>
+          <div class="stat-label" style="color:#E89042">In Process</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(orange/total*100)}%;background:#E89042"></div></div>
+          <div class="stat-sub">${Math.round(orange/total*100)}% of total</div>
         </div>
         <div class="stat-card s-red">
-          <div class="stat-num" style="color:#AB3D41">${remaining}</div>
-          <div class="stat-label" style="color:#AB3D41">Remaining</div>
-          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(remaining/total*100)}%;background:#AB3D41"></div></div>
-          <div class="stat-sub">${Math.round(remaining/total*100)}% of total</div>
+          <div class="stat-num" style="color:#AB3D41">${red}</div>
+          <div class="stat-label" style="color:#AB3D41">Inventoried</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="width:${Math.round(red/total*100)}%;background:#AB3D41"></div></div>
+          <div class="stat-sub">${Math.round(red/total*100)}% of total</div>
         </div>
       `;
 
       const breakdown = document.getElementById("county-breakdown");
-      const rows = Object.entries(countyStats).map(([county, s]) => {
-        const rem = s.total - s.registered;
-        return `
+      const rows = Object.entries(countyStats).map(([county, s]) => `
         <div class="cb-row">
           <span style="font-weight:600">${county}</span>
           <span class="cb-num">${s.total}</span>
-          <span style="text-align:center">${s.registered > 0 ? `<span class="cb-pill g">${s.registered}</span>` : `<span class="cb-pill z">—</span>`}</span>
-          <span style="text-align:center">${rem > 0 ? `<span class="cb-pill r">${rem}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${s.green > 0 ? `<span class="cb-pill g">${s.green}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${s.orange > 0 ? `<span class="cb-pill o">${s.orange}</span>` : `<span class="cb-pill z">—</span>`}</span>
+          <span style="text-align:center">${s.red > 0 ? `<span class="cb-pill r">${s.red}</span>` : `<span class="cb-pill z">—</span>`}</span>
         </div>
-      `;
-      }).join("");
+      `).join("");
 
       breakdown.innerHTML = `
         <div class="cb-header">
           <span>County</span>
           <span style="text-align:center">Total</span>
           <span style="text-align:center;color:#327F5A">Reg.</span>
-          <span style="text-align:center;color:#AB3D41">Remaining</span>
+          <span style="text-align:center;color:#E89042">In Proc.</span>
+          <span style="text-align:center;color:#AB3D41">Inventoried</span>
         </div>
         ${rows}
       `;
